@@ -42,8 +42,6 @@ class LaunchListViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
-    
-    
 }
 
 //MARK: - UITableViewDataSource
@@ -65,9 +63,6 @@ extension LaunchListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         100
     }
-    
-    
-    
 }
 
 //MARK: - UITableViewDelegate

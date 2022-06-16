@@ -10,6 +10,7 @@
 		048D239B285B740100A0B4FA /* HorizontalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D239A285B740100A0B4FA /* HorizontalCell.swift */; };
 		048D23A0285B750700A0B4FA /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D239E285B750700A0B4FA /* UIView+Constraints.swift */; };
 		048D23A3285B75D500A0B4FA /* UIStackView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D23A2285B75D500A0B4FA /* UIStackView+Constraints.swift */; };
+		048D23A5285B82B600A0B4FA /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D23A4285B82B600A0B4FA /* CustomCell.swift */; };
 		04CCB6B5285A14A700543622 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCB6B4285A14A700543622 /* AppDelegate.swift */; };
 		04CCB6B9285A14A700543622 /* RocketInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCB6B8285A14A700543622 /* RocketInfoViewController.swift */; };
 		04CCB6BE285A14AA00543622 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04CCB6BD285A14AA00543622 /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 		048D239A285B740100A0B4FA /* HorizontalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCell.swift; sourceTree = "<group>"; };
 		048D239E285B750700A0B4FA /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		048D23A2285B75D500A0B4FA /* UIStackView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView+Constraints.swift"; sourceTree = "<group>"; };
+		048D23A4285B82B600A0B4FA /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		04CCB6B1285A14A700543622 /* SpaceX_Rocket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceX_Rocket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CCB6B4285A14A700543622 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04CCB6B8285A14A700543622 /* RocketInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketInfoViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				048D239A285B740100A0B4FA /* HorizontalCell.swift */,
+				048D23A4285B82B600A0B4FA /* CustomCell.swift */,
 			);
 			name = Cell;
 			path = RocketInfoVC/Cell;
@@ -270,6 +273,7 @@
 				04CCB6B5285A14A700543622 /* AppDelegate.swift in Sources */,
 				048D23A3285B75D500A0B4FA /* UIStackView+Constraints.swift in Sources */,
 				A555EFEB285A7C180066B789 /* SettingsViewController.swift in Sources */,
+				048D23A5285B82B600A0B4FA /* CustomCell.swift in Sources */,
 				A555EFEF285B28FA0066B789 /* LaunchListViewController.swift in Sources */,
 				A555EFF1285B29E00066B789 /* LaunchListCell.swift in Sources */,
 				048D239B285B740100A0B4FA /* HorizontalCell.swift in Sources */,

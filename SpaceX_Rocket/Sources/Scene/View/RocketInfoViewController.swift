@@ -22,6 +22,7 @@ class RocketInfoViewController: UIViewController, UICollectionViewDelegate {
         let view = UIScrollView(frame: .zero)
         view.contentInsetAdjustmentBehavior = .never
         view.isPagingEnabled = true
+        view.showsVerticalScrollIndicator = false
         return view
     }()
     
@@ -78,7 +79,7 @@ class RocketInfoViewController: UIViewController, UICollectionViewDelegate {
         let tableView = UITableView.init(frame: CGRect.zero, style: . grouped)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CellID")
+        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.reuseID)
         tableView.separatorStyle = .none
         tableView.isScrollEnabled = false
         tableView.backgroundColor = .black
@@ -263,14 +264,13 @@ extension RocketInfoViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CellID", for: indexPath) as UITableViewCell
-  
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.reuseID, for: indexPath) as? CustomTableViewCell else { return UITableViewCell() }
+        
         var configuration = cell.defaultContentConfiguration()
         cell.backgroundColor = .black
         let label = UILabel.init(frame: CGRect(x:0, y:0, width: 124, height: 20))
         label.textAlignment = .right
         cell.accessoryView = label
-
         
         switch indexPath.section {
             
@@ -292,21 +292,43 @@ extension RocketInfoViewController: UITableViewDataSource {
             switch indexPath.row {
         case 0:
             configuration.text = "Количество двигателей"
+                label.textColor = .systemGray
+                label.text = "   "
+                cell.quantityLabel.text = "27"
         case 1:
-            configuration.text = "Первый запуск"
+                configuration.text = "Количество топлива"
+                label.textColor = .systemGray
+                label.font = UIFont.boldSystemFont(ofSize: 17)
+                label.text = "ton"
+                cell.quantityLabel.text = "306.6"
         case 2:
             configuration.text = "Первый запуск"
+                label.textColor = .systemGray
+                label.font = UIFont.boldSystemFont(ofSize: 17)
+                label.text = "sec"
+                cell.quantityLabel.text = "306.6"
         default: configuration.image = nil
     }
         
     case 2:
             switch indexPath.row {
             case 0:
-                configuration.text = "Первый запуск"
+                configuration.text = "Количество двигателей"
+                    label.textColor = .systemGray
+                    label.text = "   "
+                    cell.quantityLabel.text = "27"
             case 1:
-                configuration.text = "Первый запуск"
+                configuration.text = "Количество топлива"
+                label.textColor = .systemGray
+                label.font = UIFont.boldSystemFont(ofSize: 17)
+                label.text = "ton"
+                cell.quantityLabel.text = "306.6"
             case 2:
                 configuration.text = "Первый запуск"
+                    label.textColor = .systemGray
+                    label.font = UIFont.boldSystemFont(ofSize: 17)
+                    label.text = "sec"
+                    cell.quantityLabel.text = "306.6"
             default: configuration.image = nil
 }
         default: break
