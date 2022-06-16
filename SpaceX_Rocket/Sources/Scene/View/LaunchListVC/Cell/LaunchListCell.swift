@@ -46,8 +46,8 @@ class LaunchListCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(named: "ok")
         return imageView
-        
     }()
+    
     //MARK: - Initialize
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -62,10 +62,15 @@ class LaunchListCell: UITableViewCell {
     
     //MARK: - Settings
     private func setupHierarchy() {
-        contentView.addSubview(launchImage)
-        contentView.addSubview(verticalStack)
-        verticalStack.addArrangedSubview(nameLabel)
-        verticalStack.addArrangedSubview(dateLabel)
+        contentView.addSubviewsForAutoLayout([
+            launchImage,
+            verticalStack,
+        ])
+        
+        verticalStack.addArrangedSubviewsForAutoLayout([
+            nameLabel,
+            dateLabel
+        ])
     }
     
     private func setupLayout() {
@@ -79,7 +84,6 @@ class LaunchListCell: UITableViewCell {
             launchImage.centerYAnchor.constraint(equalTo: verticalStack.centerYAnchor)
         ])
     }
-    
 }
 
 //MARK: - Metrics

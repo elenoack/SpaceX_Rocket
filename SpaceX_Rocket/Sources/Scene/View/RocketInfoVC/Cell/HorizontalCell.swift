@@ -11,8 +11,8 @@ class HorizontalCell: UICollectionViewCell {
     // MARK: - Constants
     
     enum Metric {
-        static let indent: CGFloat = 8
-        static let viewRadius: CGFloat = 13
+        static let indent: CGFloat = 11
+        static let viewRadius: CGFloat = 28
     }
     
     // MARK: - Properties
@@ -21,7 +21,7 @@ class HorizontalCell: UICollectionViewCell {
     
     lazy var cellView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGray
+        view.backgroundColor = .darkGray
         view.layer.cornerRadius = Metric.viewRadius
         return view
     }()
@@ -29,7 +29,7 @@ class HorizontalCell: UICollectionViewCell {
     lazy var countLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: 19)
+        label.font = UIFont.boldSystemFont(ofSize: 17)
         label.textColor = .white
         return label
     }()
@@ -37,8 +37,8 @@ class HorizontalCell: UICollectionViewCell {
     lazy var parameterLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: 18)
-        label.textColor = .gray
+        label.font = .systemFont(ofSize: 16)
+        label.textColor = .systemGray
         return label
     }()
     

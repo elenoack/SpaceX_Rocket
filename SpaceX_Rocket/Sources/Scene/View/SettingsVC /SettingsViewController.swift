@@ -153,21 +153,33 @@ class SettingsViewController: UIViewController {
 
     private func setupHierarchy() {
         view.addSubview(parrentStackView)
-        parrentStackView.addArrangedSubview(firstHorizontalStackView)
-        parrentStackView.addArrangedSubview(secontHorizontalStackView)
-        parrentStackView.addArrangedSubview(thirdHorizontalStackView)
-        parrentStackView.addArrangedSubview(fourthHorizontalStackView)
+        
+        parrentStackView.addArrangedSubviewsForAutoLayout([
+            firstHorizontalStackView,
+            secontHorizontalStackView,
+            thirdHorizontalStackView,
+            fourthHorizontalStackView
+        ])
+    
+        firstHorizontalStackView.addArrangedSubviewsForAutoLayout([
+            heightLabel,
+            heightSegmentedControl,
+        ])
 
+        secontHorizontalStackView.addArrangedSubviewsForAutoLayout([
+            diameterLabel,
+            diameterSegmentedControl,
+        ])
         
-        firstHorizontalStackView.addArrangedSubview(heightLabel)
-        secontHorizontalStackView.addArrangedSubview(diameterLabel)
-        thirdHorizontalStackView.addArrangedSubview(weightLabel)
-        fourthHorizontalStackView.addArrangedSubview(payloadLabel)
+        thirdHorizontalStackView.addArrangedSubviewsForAutoLayout([
+            weightLabel,
+            weightSegmentedControl,
+        ])
         
-        firstHorizontalStackView.addArrangedSubview(heightSegmentedControl)
-        secontHorizontalStackView.addArrangedSubview(diameterSegmentedControl)
-        thirdHorizontalStackView.addArrangedSubview(weightSegmentedControl)
-        fourthHorizontalStackView.addArrangedSubview(payloadSegmentedControl)
+        fourthHorizontalStackView.addArrangedSubviewsForAutoLayout([
+            payloadLabel,
+            payloadSegmentedControl,
+        ])
     }
     
     private func setupLayout() {
