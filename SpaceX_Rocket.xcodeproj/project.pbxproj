@@ -11,6 +11,8 @@
 		04CCB6B9285A14A700543622 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCB6B8285A14A700543622 /* ViewController.swift */; };
 		04CCB6BE285A14AA00543622 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04CCB6BD285A14AA00543622 /* Assets.xcassets */; };
 		A555EFEB285A7C180066B789 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A555EFEA285A7C180066B789 /* SettingsViewController.swift */; };
+		A555EFEF285B28FA0066B789 /* LaunchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A555EFEE285B28FA0066B789 /* LaunchListViewController.swift */; };
+		A555EFF1285B29E00066B789 /* LaunchListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A555EFF0285B29E00066B789 /* LaunchListCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		04CCB6BD285A14AA00543622 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04CCB6C2285A14AA00543622 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A555EFEA285A7C180066B789 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		A555EFEE285B28FA0066B789 /* LaunchListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchListViewController.swift; sourceTree = "<group>"; };
+		A555EFF0285B29E00066B789 /* LaunchListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				04CCB6B8285A14A700543622 /* ViewController.swift */,
+				A555EFED285B28D60066B789 /* LaunchListVC */,
 				A555EFEC285A7C1D0066B789 /* SettingsVC  */,
 			);
 			path = View;
@@ -139,6 +144,15 @@
 				A555EFEA285A7C180066B789 /* SettingsViewController.swift */,
 			);
 			path = "SettingsVC ";
+			sourceTree = "<group>";
+		};
+		A555EFED285B28D60066B789 /* LaunchListVC */ = {
+			isa = PBXGroup;
+			children = (
+				A555EFEE285B28FA0066B789 /* LaunchListViewController.swift */,
+				A555EFF0285B29E00066B789 /* LaunchListCell.swift */,
+			);
+			path = LaunchListVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,6 +227,8 @@
 				04CCB6B9285A14A700543622 /* ViewController.swift in Sources */,
 				04CCB6B5285A14A700543622 /* AppDelegate.swift in Sources */,
 				A555EFEB285A7C180066B789 /* SettingsViewController.swift in Sources */,
+				A555EFEF285B28FA0066B789 /* LaunchListViewController.swift in Sources */,
+				A555EFF1285B29E00066B789 /* LaunchListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
