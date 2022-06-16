@@ -223,19 +223,19 @@ extension RocketInfoViewController: UICollectionViewDataSource {
         switch indexPath.row {
         case 0:
             cell.countLabel.text = "234"
-            cell.nameLabel.text = "Высота, ft"
+            cell.parameterLabel.text = "Высота, ft"
         case 1:
             cell.countLabel.text = "234"
-            cell.nameLabel.text = "Диаметр, ft"
+            cell.parameterLabel.text = "Диаметр, ft"
         case 2:
             cell.countLabel.text = "234"
-            cell.nameLabel.text = "Масса, lb"
+            cell.parameterLabel.text = "Масса, lb"
         case 3:
             cell.countLabel.text = "234"
-            cell.nameLabel.text = "Нагрузка, lb"
+            cell.parameterLabel.text = "Нагрузка, lb"
         default:
             cell.countLabel.text = nil
-            cell.nameLabel.text = nil
+            cell.parameterLabel.text = nil
         }
         return cell
     }

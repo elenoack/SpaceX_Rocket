@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		048D239B285B740100A0B4FA /* HorizontalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D239A285B740100A0B4FA /* HorizontalCell.swift */; };
+		048D23A0285B750700A0B4FA /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D239E285B750700A0B4FA /* UIView+Constraints.swift */; };
+		048D23A3285B75D500A0B4FA /* UIStackView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D23A2285B75D500A0B4FA /* UIStackView+Constraints.swift */; };
 		04CCB6B5285A14A700543622 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCB6B4285A14A700543622 /* AppDelegate.swift */; };
 		04CCB6B9285A14A700543622 /* RocketInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCB6B8285A14A700543622 /* RocketInfoViewController.swift */; };
 		04CCB6BE285A14AA00543622 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04CCB6BD285A14AA00543622 /* Assets.xcassets */; };
@@ -16,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		048D239A285B740100A0B4FA /* HorizontalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCell.swift; sourceTree = "<group>"; };
+		048D239E285B750700A0B4FA /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
+		048D23A2285B75D500A0B4FA /* UIStackView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView+Constraints.swift"; sourceTree = "<group>"; };
 		04CCB6B1285A14A700543622 /* SpaceX_Rocket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceX_Rocket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CCB6B4285A14A700543622 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04CCB6B8285A14A700543622 /* RocketInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketInfoViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +43,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		048D2398285B736700A0B4FA /* RocketInfoVC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = RocketInfoVC;
+			sourceTree = "<group>";
+		};
+		048D2399285B73DA00A0B4FA /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				048D239A285B740100A0B4FA /* HorizontalCell.swift */,
+			);
+			name = Cell;
+			path = RocketInfoVC/Cell;
+			sourceTree = "<group>";
+		};
+		048D239C285B750700A0B4FA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				048D239E285B750700A0B4FA /* UIView+Constraints.swift */,
+				048D23A2285B75D500A0B4FA /* UIStackView+Constraints.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		048D23A1285B758C00A0B4FA /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A555EFF0285B29E00066B789 /* LaunchListCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		04CCB6A8285A14A700543622 = {
 			isa = PBXGroup;
 			children = (
@@ -75,7 +114,6 @@
 			isa = PBXGroup;
 			children = (
 				04CCB6CC285A751600543622 /* Application */,
-				04CCB6D1285A77E100543622 /* Extensions */,
 				04CCB6CD285A752500543622 /* Scene */,
 			);
 			path = Sources;
@@ -101,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				04CCB6B4285A14A700543622 /* AppDelegate.swift */,
+				048D239C285B750700A0B4FA /* Extensions */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -118,7 +157,9 @@
 		04CCB6CE285A752D00543622 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				04CCB6B8285A14A700543622 /* ViewController.swift */,
+				048D2398285B736700A0B4FA /* RocketInfoVC */,
+				04CCB6B8285A14A700543622 /* RocketInfoViewController.swift */,
+				048D2399285B73DA00A0B4FA /* Cell */,
 				A555EFED285B28D60066B789 /* LaunchListVC */,
 				A555EFEC285A7C1D0066B789 /* SettingsVC  */,
 			);
@@ -151,7 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				A555EFEE285B28FA0066B789 /* LaunchListViewController.swift */,
-				A555EFF0285B29E00066B789 /* LaunchListCell.swift */,
+				048D23A1285B758C00A0B4FA /* Cell */,
 			);
 			path = LaunchListVC;
 			sourceTree = "<group>";
@@ -225,13 +266,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04CCB6D8285A838A00543622 /* HorizontalCell.swift in Sources */,
-				04CCB6D3285A77E100543622 /* UIView+Constraints.swift in Sources */,
 				04CCB6B9285A14A700543622 /* RocketInfoViewController.swift in Sources */,
 				04CCB6B5285A14A700543622 /* AppDelegate.swift in Sources */,
+				048D23A3285B75D500A0B4FA /* UIStackView+Constraints.swift in Sources */,
 				A555EFEB285A7C180066B789 /* SettingsViewController.swift in Sources */,
 				A555EFEF285B28FA0066B789 /* LaunchListViewController.swift in Sources */,
 				A555EFF1285B29E00066B789 /* LaunchListCell.swift in Sources */,
+				048D239B285B740100A0B4FA /* HorizontalCell.swift in Sources */,
+				048D23A0285B750700A0B4FA /* UIView+Constraints.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
