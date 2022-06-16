@@ -9,19 +9,17 @@ import UIKit
 
 class HorizontalCell: UICollectionViewCell {
     // MARK: - Constants
-    
     enum Metric {
         static let indent: CGFloat = 11
         static let viewRadius: CGFloat = 28
     }
     
     // MARK: - Properties
-    
     static let reuseID = "HorizontalCell"
     
     lazy var cellView: UIView = {
         let view = UIView()
-        view.backgroundColor = .darkGray
+        view.backgroundColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1)
         view.layer.cornerRadius = Metric.viewRadius
         return view
     }()
@@ -43,7 +41,6 @@ class HorizontalCell: UICollectionViewCell {
     }()
     
     // MARK: - Initialization
-    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         configure()
@@ -55,7 +52,6 @@ class HorizontalCell: UICollectionViewCell {
 }
 
 // MARK: - Configuration
-
 extension HorizontalCell {
     
     func configure() {

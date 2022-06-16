@@ -25,7 +25,7 @@ class LaunchListCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "testData"
         label.textColor = .white
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.font = .systemFont(ofSize: 20, weight: .semibold)
         return label
     }()
     
@@ -34,7 +34,7 @@ class LaunchListCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "testData"
         label.textColor = .lightGray
-        label.font = .systemFont(ofSize: 13, weight: .light)
+        label.font = .systemFont(ofSize: 20, weight: .light)
         return label
     }()
     
@@ -51,7 +51,8 @@ class LaunchListCell: UITableViewCell {
     //MARK: - Initialize
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = UIColor(red: 12/255, green: 11/255, blue: 13/255, alpha: 1)
+        contentView.backgroundColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1)
+        contentView.layer.cornerRadius = Metric.radius
         setupHierarchy()
         setupLayout()
     }
@@ -88,10 +89,12 @@ class LaunchListCell: UITableViewCell {
 
 //MARK: - Metrics
 extension LaunchListCell {
+    
     enum Metric {
         static let imageWidth: CGFloat = 40
         static let imageHeight: CGFloat = 40
         static let leadingSpacing: CGFloat = 50
         static let trailingSpacing: CGFloat = -50
+        static let radius: CGFloat = 26
     }
 }

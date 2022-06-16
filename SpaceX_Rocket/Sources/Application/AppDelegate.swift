@@ -16,7 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         let viewController = RocketInfoViewController()
-        window?.rootViewController = viewController
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.isNavigationBarHidden = true
+        navigationController.navigationBar.tintColor = .white
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         return true
     }
