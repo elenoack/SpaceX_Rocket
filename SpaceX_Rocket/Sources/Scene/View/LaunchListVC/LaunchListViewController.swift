@@ -11,6 +11,7 @@ class LaunchListViewController: UIViewController {
     
     //MARK: - Views
     let rockets = ["FalconSat", "Heavy Holidays", "CRS-24 Mission"]
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.backgroundColor = .black
@@ -27,6 +28,7 @@ class LaunchListViewController: UIViewController {
         super.viewDidLoad()
         setupHieararchy()
         setupLayout()
+        setupavigationController()
     }
     
     //MARK: - Settings
@@ -42,6 +44,11 @@ class LaunchListViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
+    
+    private func setupavigationController() {
+        navigationController?.isNavigationBarHidden = false
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: #selector (back))
+    }
 }
 
 //MARK: - UITableViewDataSource
@@ -56,7 +63,7 @@ extension LaunchListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: LaunchListCell.reuseId, for: indexPath) as? LaunchListCell else { return UITableViewCell()}
-        
+        cell.backgroundColor = .clear
         return cell
     }
     
@@ -75,5 +82,14 @@ extension LaunchListViewController: UITableViewDelegate {
         let headerView = UIView()
         headerView.backgroundColor = UIColor.black
         return headerView
+    }
+}
+
+// MARK: - Actions
+extension LaunchListViewController {
+    
+    @objc
+    func back() {
+        navigationController?.popViewController(animated: true)
     }
 }

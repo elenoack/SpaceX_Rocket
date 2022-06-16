@@ -9,7 +9,6 @@ import UIKit
 
 class RocketInfoViewController: UIViewController, UICollectionViewDelegate {
     // MARK: - Properties
-    
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "rocket")
@@ -53,7 +52,7 @@ class RocketInfoViewController: UIViewController, UICollectionViewDelegate {
         let button = UIButton(type: .system)
         button.setBackgroundImage(UIImage(systemName: "gearshape"), for: UIControl.State.normal)
         button.tintColor = .white
-//        button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector()))
+        button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openSettingsVC)))
         return button
     }()
     
@@ -90,16 +89,15 @@ class RocketInfoViewController: UIViewController, UICollectionViewDelegate {
     private lazy var watchLaunchesButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Посмотреть запуски", for: .normal)
-        button.backgroundColor = .darkGray
+        button.backgroundColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.tintColor = .white
         button.layer.cornerRadius = Metric.watchLaunchesButtonHeight/3
-//        button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector()))
+        button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openLaunchVC)))
         return button
     }()
     
     // MARK: - View Life Cycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupHierarchy()
@@ -109,7 +107,6 @@ class RocketInfoViewController: UIViewController, UICollectionViewDelegate {
 }
 
 // MARK: - Settings
-
 extension RocketInfoViewController {
     
     func setupHierarchy() {
@@ -141,7 +138,6 @@ extension RocketInfoViewController {
 }
 
 // MARK: - SettingsContentView
-
 extension RocketInfoViewController {
     
     func setupContentView() {
@@ -204,8 +200,7 @@ extension RocketInfoViewController {
     }
 }
 
-// MARK: - UICollectionViewDataSource
-
+// MARK: - UICollectionViewDataSourc
 extension RocketInfoViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -288,35 +283,13 @@ extension RocketInfoViewController: UITableViewDataSource {
             default: configuration.image = nil
             }
             
-            case 1:
-            switch indexPath.row {
-        case 0:
-            configuration.text = "Количество двигателей"
-                label.textColor = .systemGray
-                label.text = "   "
-                cell.quantityLabel.text = "27"
         case 1:
-                configuration.text = "Количество топлива"
-                label.textColor = .systemGray
-                label.font = UIFont.boldSystemFont(ofSize: 17)
-                label.text = "ton"
-                cell.quantityLabel.text = "306.6"
-        case 2:
-            configuration.text = "Первый запуск"
-                label.textColor = .systemGray
-                label.font = UIFont.boldSystemFont(ofSize: 17)
-                label.text = "sec"
-                cell.quantityLabel.text = "306.6"
-        default: configuration.image = nil
-    }
-        
-    case 2:
             switch indexPath.row {
             case 0:
                 configuration.text = "Количество двигателей"
-                    label.textColor = .systemGray
-                    label.text = "   "
-                    cell.quantityLabel.text = "27"
+                label.textColor = .systemGray
+                label.text = "   "
+                cell.quantityLabel.text = "27"
             case 1:
                 configuration.text = "Количество топлива"
                 label.textColor = .systemGray
@@ -325,12 +298,34 @@ extension RocketInfoViewController: UITableViewDataSource {
                 cell.quantityLabel.text = "306.6"
             case 2:
                 configuration.text = "Первый запуск"
-                    label.textColor = .systemGray
-                    label.font = UIFont.boldSystemFont(ofSize: 17)
-                    label.text = "sec"
-                    cell.quantityLabel.text = "306.6"
+                label.textColor = .systemGray
+                label.font = UIFont.boldSystemFont(ofSize: 17)
+                label.text = "sec"
+                cell.quantityLabel.text = "306.6"
             default: configuration.image = nil
-}
+            }
+            
+        case 2:
+            switch indexPath.row {
+            case 0:
+                configuration.text = "Количество двигателей"
+                label.textColor = .systemGray
+                label.text = "   "
+                cell.quantityLabel.text = "27"
+            case 1:
+                configuration.text = "Количество топлива"
+                label.textColor = .systemGray
+                label.font = UIFont.boldSystemFont(ofSize: 17)
+                label.text = "ton"
+                cell.quantityLabel.text = "306.6"
+            case 2:
+                configuration.text = "Первый запуск"
+                label.textColor = .systemGray
+                label.font = UIFont.boldSystemFont(ofSize: 17)
+                label.text = "sec"
+                cell.quantityLabel.text = "306.6"
+            default: configuration.image = nil
+            }
         default: break
         }
         
@@ -339,9 +334,8 @@ extension RocketInfoViewController: UITableViewDataSource {
         
     }
 }
-    
-    // MARK: - UITableViewDelegate
-    
+
+// MARK: - UITableViewDelegate
 extension RocketInfoViewController: UITableViewDelegate {
         
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -372,9 +366,28 @@ extension RocketInfoViewController: UITableViewDelegate {
             return headerView
         }
     }
-    
-// MARK: - Constants
 
+// MARK: - Actions
+extension RocketInfoViewController{
+    
+    @objc
+    func openLaunchVC()  {
+        let viewController = LaunchListViewController()
+        self.navigationItem.backButtonTitle = "Назад"
+        viewController.title = "Имя"
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    @objc
+    func openSettingsVC() {
+        let viewController = SettingsViewController()
+        viewController.title = "Настройки"
+        let navigationController = UINavigationController(rootViewController: viewController)
+        present(navigationController, animated: true)
+    }
+}
+
+// MARK: - Constants
 extension RocketInfoViewController {
     
     enum Metric {
@@ -395,3 +408,4 @@ extension RocketInfoViewController {
         static let tableViewHeaderHeight: CGFloat = 50
     }
 }
+
