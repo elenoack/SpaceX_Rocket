@@ -33,14 +33,14 @@ class SettingsViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.distribution = .fillEqually
         stackView.axis = .vertical
-        stackView.spacing = 20
+        stackView.spacing = Metric.parrentStackSpacing
         return stackView
     }()
     
     private lazy var firstHorizontalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 72
+        stackView.spacing = Metric.stackSpacing
         stackView.distribution = .fillEqually
         return stackView
     }()
@@ -48,7 +48,7 @@ class SettingsViewController: UIViewController {
     private lazy var secontHorizontalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 72
+        stackView.spacing = Metric.stackSpacing
         stackView.distribution = .fillEqually
         return stackView
     }()
@@ -56,7 +56,7 @@ class SettingsViewController: UIViewController {
     private lazy var thirdHorizontalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 72
+        stackView.spacing = Metric.stackSpacing
         stackView.distribution = .fillEqually
         return stackView
     }()
@@ -64,7 +64,7 @@ class SettingsViewController: UIViewController {
     private lazy var fourthHorizontalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 69
+        stackView.spacing = Metric.stackSpacing
         stackView.distribution = .fillEqually
         return stackView
     }()
@@ -97,18 +97,20 @@ class SettingsViewController: UIViewController {
         let label = UILabel()
         label.font = .systemFont(ofSize: 17, weight: .medium)
         label.textColor = .white
-        label.text = "Полезная нагрузка"
+        label.text = "Нагрузка"
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
         return label
     }()
     
     private lazy var heightSegmentedControl: UISegmentedControl = {
         let segmentedItems = ["m", "ft"]
-        let font = UIFont.systemFont(ofSize: 16)
+        let font = UIFont.systemFont(ofSize: 17)
         let segmentedControl = UISegmentedControl(items: segmentedItems)
-        let selectTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        let normalTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
-        segmentedControl.setTitleTextAttributes(selectTitleTextAttributes, for: .selected)
-        segmentedControl.setTitleTextAttributes(normalTitleTextAttributes, for: .normal)
+        let selectedAttribute: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.black]
+        let normalAttribute: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.lightGray]
+        segmentedControl.setTitleTextAttributes(selectedAttribute, for: .selected)
+        segmentedControl.setTitleTextAttributes(normalAttribute, for: .normal)
         segmentedControl.selectedSegmentIndex = 0
         return segmentedControl
     }()
@@ -116,10 +118,11 @@ class SettingsViewController: UIViewController {
     private lazy var diameterSegmentedControl: UISegmentedControl = {
         let segmentedItems = ["m", "ft"]
         let segmentedControl = UISegmentedControl(items: segmentedItems)
-        let selectTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        let normalTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
-        segmentedControl.setTitleTextAttributes(selectTitleTextAttributes, for: .selected)
-        segmentedControl.setTitleTextAttributes(normalTitleTextAttributes, for: .normal)
+        let font = UIFont.systemFont(ofSize: 17)
+        let selectedAttribute: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.black]
+        let normalAttribute: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.lightGray]
+        segmentedControl.setTitleTextAttributes(selectedAttribute, for: .selected)
+        segmentedControl.setTitleTextAttributes(normalAttribute, for: .normal)
         segmentedControl.selectedSegmentIndex = 0
         return segmentedControl
     }()
@@ -127,10 +130,11 @@ class SettingsViewController: UIViewController {
     private lazy var weightSegmentedControl: UISegmentedControl = {
         let segmentedItems = ["kg", "lb"]
         let segmentedControl = UISegmentedControl(items: segmentedItems)
-        let selectTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        let normalTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
-        segmentedControl.setTitleTextAttributes(selectTitleTextAttributes, for: .selected)
-        segmentedControl.setTitleTextAttributes(normalTitleTextAttributes, for: .normal)
+        let font = UIFont.systemFont(ofSize: 17)
+        let selectedAttribute: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.black]
+        let normalAttribute: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.lightGray]
+        segmentedControl.setTitleTextAttributes(selectedAttribute, for: .selected)
+        segmentedControl.setTitleTextAttributes(normalAttribute, for: .normal)
         segmentedControl.selectedSegmentIndex = 0
         return segmentedControl
     }()
@@ -138,10 +142,11 @@ class SettingsViewController: UIViewController {
     private lazy var payloadSegmentedControl: UISegmentedControl = {
         let segmentedItems = ["kg", "lb"]
         let segmentedControl = UISegmentedControl(items: segmentedItems)
-        let selectTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        let normalTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
-        segmentedControl.setTitleTextAttributes(selectTitleTextAttributes, for: .selected)
-        segmentedControl.setTitleTextAttributes(normalTitleTextAttributes, for: .normal)
+        let font = UIFont.systemFont(ofSize: 17)
+        let selectedAttribute: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.black]
+        let normalAttribute: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.lightGray]
+        segmentedControl.setTitleTextAttributes(selectedAttribute, for: .selected)
+        segmentedControl.setTitleTextAttributes(normalAttribute, for: .normal)
         segmentedControl.selectedSegmentIndex = 0
         return segmentedControl
     }()
@@ -189,10 +194,10 @@ class SettingsViewController: UIViewController {
     
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            parrentStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            parrentStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            parrentStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
-            parrentStackView.heightAnchor.constraint(equalToConstant: 250)
+            parrentStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Metric.parrentStackIndent),
+            parrentStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Metric.parrentStackIndent),
+            parrentStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: Metric.parrentStackTopIndent),
+            parrentStackView.heightAnchor.constraint(equalToConstant: Metric.parrentStackHeight)
         ])
     }
     
@@ -209,3 +214,16 @@ extension SettingsViewController {
         dismiss(animated: true)
     }
 }
+
+// MARK: - Constants
+extension SettingsViewController {
+    
+    enum Metric {
+        static let parrentStackTopIndent: CGFloat = 150
+        static let parrentStackHeight: CGFloat = 250
+        static let parrentStackIndent: CGFloat = 16
+        static let parrentStackSpacing: CGFloat = 20
+        static let stackSpacing: CGFloat = 72
+    }
+}
+

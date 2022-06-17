@@ -64,6 +64,7 @@ extension LaunchListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: LaunchListCell.reuseId, for: indexPath) as? LaunchListCell else { return UITableViewCell()}
         cell.backgroundColor = .clear
+        cell.selectionStyle = .none
         return cell
     }
     
