@@ -17,6 +17,8 @@
 		A555EFEB285A7C180066B789 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A555EFEA285A7C180066B789 /* SettingsViewController.swift */; };
 		A555EFEF285B28FA0066B789 /* LaunchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A555EFEE285B28FA0066B789 /* LaunchListViewController.swift */; };
 		A555EFF1285B29E00066B789 /* LaunchListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A555EFF0285B29E00066B789 /* LaunchListCell.swift */; };
+		A555EFF5285C6C8F0066B789 /* RocketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A555EFF4285C6C8F0066B789 /* RocketModel.swift */; };
+		A555EFF9285C7A080066B789 /* RocketDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A555EFF8285C7A080066B789 /* RocketDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		A555EFEA285A7C180066B789 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A555EFEE285B28FA0066B789 /* LaunchListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchListViewController.swift; sourceTree = "<group>"; };
 		A555EFF0285B29E00066B789 /* LaunchListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchListCell.swift; sourceTree = "<group>"; };
+		A555EFF4285C6C8F0066B789 /* RocketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketModel.swift; sourceTree = "<group>"; };
+		A555EFF8285C7A080066B789 /* RocketDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,7 +155,6 @@
 			isa = PBXGroup;
 			children = (
 				04CCB6CE285A752D00543622 /* View */,
-				04CCB6D0285A759400543622 /* Model */,
 				04CCB6CF285A753B00543622 /* Presenter */,
 			);
 			path = Scene;
@@ -165,6 +168,8 @@
 				048D2399285B73DA00A0B4FA /* Cell */,
 				A555EFED285B28D60066B789 /* LaunchListVC */,
 				A555EFEC285A7C1D0066B789 /* SettingsVC  */,
+				A555EFF6285C775D0066B789 /* Models */,
+				A555EFF7285C79E20066B789 /* DataManager */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -174,13 +179,6 @@
 			children = (
 			);
 			path = Presenter;
-			sourceTree = "<group>";
-		};
-		04CCB6D0285A759400543622 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		A555EFEC285A7C1D0066B789 /* SettingsVC  */ = {
@@ -198,6 +196,22 @@
 				048D23A1285B758C00A0B4FA /* Cell */,
 			);
 			path = LaunchListVC;
+			sourceTree = "<group>";
+		};
+		A555EFF6285C775D0066B789 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A555EFF4285C6C8F0066B789 /* RocketModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A555EFF7285C79E20066B789 /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				A555EFF8285C7A080066B789 /* RocketDataManager.swift */,
+			);
+			path = DataManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,9 +284,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				04CCB6B9285A14A700543622 /* RocketInfoViewController.swift in Sources */,
+				A555EFF5285C6C8F0066B789 /* RocketModel.swift in Sources */,
 				04CCB6B5285A14A700543622 /* AppDelegate.swift in Sources */,
 				048D23A3285B75D500A0B4FA /* UIStackView+Constraints.swift in Sources */,
 				A555EFEB285A7C180066B789 /* SettingsViewController.swift in Sources */,
+				A555EFF9285C7A080066B789 /* RocketDataManager.swift in Sources */,
 				048D23A5285B82B600A0B4FA /* CustomCell.swift in Sources */,
 				A555EFEF285B28FA0066B789 /* LaunchListViewController.swift in Sources */,
 				A555EFF1285B29E00066B789 /* LaunchListCell.swift in Sources */,
