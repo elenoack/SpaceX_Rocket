@@ -52,6 +52,8 @@
 		048D2398285B736700A0B4FA /* RocketInfoVC */ = {
 			isa = PBXGroup;
 			children = (
+				04CCB6B8285A14A700543622 /* RocketInfoViewController.swift */,
+				048D2399285B73DA00A0B4FA /* Cell */,
 			);
 			path = RocketInfoVC;
 			sourceTree = "<group>";
@@ -62,8 +64,7 @@
 				048D239A285B740100A0B4FA /* HorizontalCell.swift */,
 				048D23A4285B82B600A0B4FA /* CustomCell.swift */,
 			);
-			name = Cell;
-			path = RocketInfoVC/Cell;
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		048D239C285B750700A0B4FA /* Extensions */ = {
@@ -164,8 +165,6 @@
 			isa = PBXGroup;
 			children = (
 				048D2398285B736700A0B4FA /* RocketInfoVC */,
-				04CCB6B8285A14A700543622 /* RocketInfoViewController.swift */,
-				048D2399285B73DA00A0B4FA /* Cell */,
 				A555EFED285B28D60066B789 /* LaunchListVC */,
 				A555EFEC285A7C1D0066B789 /* SettingsVC  */,
 				A555EFF6285C775D0066B789 /* Models */,
@@ -426,6 +425,8 @@
 				INFOPLIST_FILE = SpaceX_Rocket/Resources/Configuration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = RocketInfoViewController;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -454,6 +455,8 @@
 				INFOPLIST_FILE = SpaceX_Rocket/Resources/Configuration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = RocketInfoViewController;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;

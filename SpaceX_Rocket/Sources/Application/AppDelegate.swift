@@ -18,7 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let viewController = RocketInfoViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.isNavigationBarHidden = true
+        navigationController.navigationBar.isTranslucent = true
         navigationController.navigationBar.tintColor = .white
+        window?.overrideUserInterfaceStyle = .dark
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         return true

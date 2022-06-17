@@ -118,16 +118,16 @@ extension RocketInfoViewController {
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor)
         ])
         
-        let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 1140)
+        let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: Metric.contentViewHeight)
         contentViewHeight.priority = .defaultHigh
         
         NSLayoutConstraint.activate([
@@ -266,7 +266,9 @@ extension RocketInfoViewController: UITableViewDataSource {
         let label = UILabel.init(frame: CGRect(x:0, y:0, width: 124, height: 20))
         label.textAlignment = .right
         cell.accessoryView = label
-        
+        cell.selectionStyle = .none
+        configuration.textProperties.adjustsFontSizeToFitWidth = true
+        // доделать
         switch indexPath.section {
             
         case 0:
@@ -297,7 +299,7 @@ extension RocketInfoViewController: UITableViewDataSource {
                 label.text = "ton"
                 cell.quantityLabel.text = "306.6"
             case 2:
-                configuration.text = "Первый запуск"
+                configuration.text = "Время сгорания"
                 label.textColor = .systemGray
                 label.font = UIFont.boldSystemFont(ofSize: 17)
                 label.text = "sec"
@@ -319,7 +321,7 @@ extension RocketInfoViewController: UITableViewDataSource {
                 label.text = "ton"
                 cell.quantityLabel.text = "306.6"
             case 2:
-                configuration.text = "Первый запуск"
+                configuration.text = "Время сгорания"
                 label.textColor = .systemGray
                 label.font = UIFont.boldSystemFont(ofSize: 17)
                 label.text = "sec"
@@ -391,7 +393,7 @@ extension RocketInfoViewController{
 extension RocketInfoViewController {
     
     enum Metric {
-        static let imageViewSize: CGFloat = 281
+        static let imageViewSize: CGFloat = 348
         static let indentImageView: CGFloat = 38
         static let containerViewHeight: CGFloat = 100
         static let rocketNameIndentTop: CGFloat = 36
@@ -400,12 +402,13 @@ extension RocketInfoViewController {
         static let containerViewRadius: CGFloat = 28
         static let collectionViewHeight: CGFloat = 100
         static let collectionViewIndent: CGFloat = 32
-        static let collectionViewCellSize: CGFloat = 96
+        static let collectionViewCellSize: CGFloat = 100
         static let collectionViewCellSpacing: CGFloat = 12
         static let watchLaunchesButtonHeight: CGFloat = 60
         static let tableViewIndent: CGFloat = 8
-        static let tableViewMinusIndent: CGFloat = 24
+        static let tableViewMinusIndent: CGFloat = 28
         static let tableViewHeaderHeight: CGFloat = 50
+        static let contentViewHeight: CGFloat = 1220
     }
 }
 

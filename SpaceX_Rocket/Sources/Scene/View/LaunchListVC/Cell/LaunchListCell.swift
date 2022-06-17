@@ -91,8 +91,8 @@ class LaunchListCell: UITableViewCell {
 extension LaunchListCell {
     
     enum Metric {
-        static let imageWidth: CGFloat = 40
-        static let imageHeight: CGFloat = 40
+        static let imageWidth: CGFloat = 38
+        static let imageHeight: CGFloat = 38
         static let leadingSpacing: CGFloat = 50
         static let trailingSpacing: CGFloat = -50
         static let radius: CGFloat = 26
