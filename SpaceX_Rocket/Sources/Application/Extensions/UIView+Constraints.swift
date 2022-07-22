@@ -2,9 +2,8 @@
 //  UIView Constraints.swift
 //  SpaceX_Rocket
 //
-//  Created by mac on 15.06.22.
+//  Created by Elena Noack on 15.06.22.
 //
-
 
 import UIKit
 

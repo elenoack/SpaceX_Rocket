@@ -2,7 +2,7 @@
 //  HorizontalCell.swift
 //  SpaceX_Rocket
 //
-//  Created by mac on 16.06.22.
+//  Created by Elena Noack on 16.06.22.
 //
 
 import UIKit

@@ -8,41 +8,26 @@
 import UIKit
 
 class LaunchListViewController: UIViewController {
+    // MARK: - Properties
     
-    //MARK: - Views
     let rockets = ["FalconSat", "Heavy Holidays", "CRS-24 Mission"]
-    
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.backgroundColor = .black
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(LaunchListCell.self, forCellReuseIdentifier: LaunchListCell.reuseId)
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.separatorStyle = .none
-        return tableView
-    }()
+    private var launchListView: LaunchListView? {
+        guard isViewLoaded else { return nil }
+        return view as? LaunchListView
+    }
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupHieararchy()
-        setupLayout()
+        setupView()
         setupavigationController()
     }
     
     //MARK: - Settings
-    private func setupHieararchy() {
-        view.addSubview(tableView)
-    }
-    
-    private func setupLayout() {
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
+    private func setupView() {
+        view = LaunchListView()
+        launchListView?.tableView.dataSource = self
+        launchListView?.tableView.delegate = self
     }
     
     private func setupavigationController() {
@@ -57,6 +42,7 @@ extension LaunchListViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         rockets.count
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }
