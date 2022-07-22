@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  SpaceX_Rocket
 //
-//  Created by mac on 15.06.22.
+//  Created by Elena Noack on 15.06.22.
 //
 
 import UIKit
@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        let viewController = RocketInfoViewController()
+        let viewController = PageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.isNavigationBarHidden = true
         navigationController.navigationBar.isTranslucent = true

@@ -1,26 +1,28 @@
 //
-//  SettingsViewController.swift
+//  SettingsView.swift
 //  SpaceX_Rocket
 //
-//  Created by Даниил Смирнов on 15.06.2022.
+//  Created by Elena Noack on 22.07.22.
 //
 
 import UIKit
 
-class SettingsViewController: UIViewController {
-    //MARK: - Views
-    
+class SettingsView: UIView {
+  // MARK: - Properties
+  
+  weak var viewController: SettingsViewController?
+
+  //MARK: - Views
+
     private lazy var navVC: UINavigationController = {
         let navVC = UINavigationController(rootViewController: SettingsViewController())
-        navVC.title = "Настройки"
+        navVC.title = Strings.navVCTitle
         return navVC
     }()
     
-    private lazy var navigationButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: "Закрыть",
-                                     style: .plain,
-                                     target: self,
-                                     action: #selector(back))
+    lazy var navigationButton: UIBarButtonItem = {
+        let button = UIBarButtonItem()
+        button.title = Strings.navigationButtonTitle
         button.setTitleTextAttributes([
             NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 19),
             NSAttributedString.Key.foregroundColor : UIColor.white,
@@ -73,7 +75,7 @@ class SettingsViewController: UIViewController {
         let label = UILabel()
         label.font = .systemFont(ofSize: 17, weight: .medium)
         label.textColor = .white
-        label.text = "Высота"
+        label.text = Strings.heightLabelTitle
         return label
     }()
     
@@ -81,7 +83,7 @@ class SettingsViewController: UIViewController {
         let label = UILabel()
         label.font = .systemFont(ofSize: 17, weight: .medium)
         label.textColor = .white
-        label.text = "Диаметр"
+        label.text = Strings.diameterLabelTitle
         return label
     }()
     
@@ -89,7 +91,7 @@ class SettingsViewController: UIViewController {
         let label = UILabel()
         label.font = .systemFont(ofSize: 17, weight: .medium)
         label.textColor = .white
-        label.text = "Масса"
+        label.text = Strings.weightLabelTitle
         return label
     }()
     
@@ -97,14 +99,14 @@ class SettingsViewController: UIViewController {
         let label = UILabel()
         label.font = .systemFont(ofSize: 17, weight: .medium)
         label.textColor = .white
-        label.text = "Нагрузка"
+        label.text = Strings.payloadLabelTitle
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
         return label
     }()
     
     private lazy var heightSegmentedControl: UISegmentedControl = {
-        let segmentedItems = ["m", "ft"]
+        let segmentedItems = [Strings.mass, Strings.ft]
         let font = UIFont.systemFont(ofSize: 17)
         let segmentedControl = UISegmentedControl(items: segmentedItems)
         let selectedAttribute: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.black]
@@ -116,7 +118,7 @@ class SettingsViewController: UIViewController {
     }()
     
     private lazy var diameterSegmentedControl: UISegmentedControl = {
-        let segmentedItems = ["m", "ft"]
+        let segmentedItems = [Strings.mass, Strings.ft]
         let segmentedControl = UISegmentedControl(items: segmentedItems)
         let font = UIFont.systemFont(ofSize: 17)
         let selectedAttribute: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.black]
@@ -128,7 +130,7 @@ class SettingsViewController: UIViewController {
     }()
     
     private lazy var weightSegmentedControl: UISegmentedControl = {
-        let segmentedItems = ["kg", "lb"]
+        let segmentedItems = [Strings.kg, Strings.lb]
         let segmentedControl = UISegmentedControl(items: segmentedItems)
         let font = UIFont.systemFont(ofSize: 17)
         let selectedAttribute: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.black]
@@ -140,7 +142,7 @@ class SettingsViewController: UIViewController {
     }()
     
     private lazy var payloadSegmentedControl: UISegmentedControl = {
-        let segmentedItems = ["kg", "lb"]
+        let segmentedItems = [Strings.kg, Strings.lb]
         let segmentedControl = UISegmentedControl(items: segmentedItems)
         let font = UIFont.systemFont(ofSize: 17)
         let selectedAttribute: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.black]
@@ -150,19 +152,27 @@ class SettingsViewController: UIViewController {
         segmentedControl.selectedSegmentIndex = 0
         return segmentedControl
     }()
-    
-    //MARK: - LifeCycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .black
-        setupHierarchy()
-        setupLayout()
-        setupavigationController()
+
+    // MARK: - Initial
+    init() {
+        super.init(frame: .zero)
+        commonInit()
     }
     
-    //MARK: - Settings
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+    
+    private func commonInit() {
+        backgroundColor = .lightGray
+        setupHierarchy()
+        setupLayout()
+    }
+    
+    // MARK: - Settings
     private func setupHierarchy() {
-        view.addSubview(parrentStackView)
+        addSubview(parrentStackView)
         
         parrentStackView.addArrangedSubviewsForAutoLayout([
             firstHorizontalStackView,
@@ -194,29 +204,16 @@ class SettingsViewController: UIViewController {
     
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            parrentStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Metric.parrentStackIndent),
-            parrentStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Metric.parrentStackIndent),
-            parrentStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: Metric.parrentStackTopIndent),
+            parrentStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metric.parrentStackIndent),
+            parrentStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metric.parrentStackIndent),
+            parrentStackView.topAnchor.constraint(equalTo: topAnchor, constant: Metric.parrentStackTopIndent),
             parrentStackView.heightAnchor.constraint(equalToConstant: Metric.parrentStackHeight)
         ])
-    }
-    
-    private func setupavigationController() {
-        self.navigationItem.rightBarButtonItem = navigationButton
-    }
-}
-
-// MARK: - Actions
-extension SettingsViewController {
-    
-    @objc
-    func back()  {
-        dismiss(animated: true)
     }
 }
 
 // MARK: - Constants
-extension SettingsViewController {
+extension SettingsView {
     
     enum Metric {
         static let parrentStackTopIndent: CGFloat = 150
@@ -225,5 +222,17 @@ extension SettingsViewController {
         static let parrentStackSpacing: CGFloat = 20
         static let stackSpacing: CGFloat = 72
     }
+    
+    enum Strings {
+        static let navVCTitle: String = "Настройки"
+        static let navigationButtonTitle: String = "Закрыть"
+        static let heightLabelTitle: String = "Высота"
+        static let diameterLabelTitle: String = "Диаметр"
+        static let weightLabelTitle: String = "Масса"
+        static let payloadLabelTitle: String = "Нагрузка"
+        static let mass: String = "m"
+        static let ft: String = "ft"
+        static let kg: String = "kg"
+        static let lb: String = "lb"
+    }
 }
-
