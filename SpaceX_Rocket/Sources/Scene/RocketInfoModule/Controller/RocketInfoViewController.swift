@@ -31,6 +31,10 @@ class RocketInfoViewController: UIViewController, UICollectionViewDelegate {
         super.viewDidAppear(animated)
         success()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
 }
 
 // MARK: - Settings
@@ -129,6 +133,7 @@ extension RocketInfoViewController: UICollectionViewDataSource {
                 }
             }
         }
+        presenter?.reload()
         return cell
     }
 }

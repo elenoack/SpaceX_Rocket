@@ -8,12 +8,15 @@
 import UIKit
 
 protocol SettingsViewProtocol: AnyObject {
-
+    func download()
+    func save()
 }
 
 protocol SettingsPresenterProtocol: AnyObject {
     init(view: SettingsViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
     func tapBackButton()
+    func downloadSettings()
+    func saveSettings()
 }
 
 class SettingsPresenter: SettingsPresenterProtocol {
@@ -30,6 +33,14 @@ class SettingsPresenter: SettingsPresenterProtocol {
     
     func tapBackButton() {
         router?.backToRootVCModal()
+    }
+    
+    func downloadSettings() {
+        view?.download()
+    }
+    
+    func saveSettings() {
+        view?.save()
     }
 }
 

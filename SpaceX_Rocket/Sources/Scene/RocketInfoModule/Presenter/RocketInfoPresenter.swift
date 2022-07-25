@@ -18,13 +18,14 @@ protocol RocketInfoPresenterProtocol: AnyObject {
     func tapSettingButton()
     var rockets: [Rocket]? { get set }
     var rocketsImage: UIImage { get set }
+    func reload() 
 }
 
 class RocketInfoPresenter: RocketInfoPresenterProtocol {
-    
+
     let view: RocketViewProtocol?
     let networkService: NetworkServiceProtocol?
-    let router: RouterProtocol?
+    var router: RouterProtocol?
     var rockets: [Rocket]?
     var rocketsImage = UIImage()
     let defaults = UserDefaultsStorage()
@@ -62,7 +63,6 @@ class RocketInfoPresenter: RocketInfoPresenterProtocol {
     }
     
     func fetchRocketsImage() {
-
         guard let rocketImage = rockets?.first?.image.first else { return }
         networkService?.fetchRocketImage(with: rocketImage, completion: { [weak self] image in
             DispatchQueue.main.async {
@@ -72,7 +72,11 @@ class RocketInfoPresenter: RocketInfoPresenterProtocol {
         })
     }
     
-
+    func reload() {
+        router?.saveCompletion = {
+            self.view?.success()
+           }
+    }
 }
 
 
