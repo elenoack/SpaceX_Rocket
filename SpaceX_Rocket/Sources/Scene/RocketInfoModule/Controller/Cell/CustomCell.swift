@@ -9,6 +9,7 @@ import UIKit
 
 class CustomTableViewCell: UITableViewCell {
     // MARK: - Properties
+    
     static let reuseID = "CustomTableViewCell"
     
     lazy var quantityLabel: UILabel = {
@@ -20,6 +21,7 @@ class CustomTableViewCell: UITableViewCell {
     }()
     
     // MARK: - Initialization
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         
@@ -28,8 +30,8 @@ class CustomTableViewCell: UITableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-        quantityLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-        quantityLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -56),
+            quantityLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            quantityLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -56),
         ])
     }
     
@@ -38,6 +40,7 @@ class CustomTableViewCell: UITableViewCell {
     }
     
     // MARK: - Сonfiguration
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         quantityLabel.text = nil
@@ -46,7 +49,7 @@ class CustomTableViewCell: UITableViewCell {
 
 
 
-    
 
-    
+
+
 

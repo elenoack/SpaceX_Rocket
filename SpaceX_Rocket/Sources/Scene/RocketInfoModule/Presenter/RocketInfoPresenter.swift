@@ -9,7 +9,8 @@ import UIKit
 
 protocol RocketViewProtocol: AnyObject {
     func success()
-    func failure(error: Error)
+    func failure(error: NetworkError)
+    func setupDisplay()
 }
 
 protocol RocketInfoPresenterProtocol: AnyObject {
@@ -17,8 +18,10 @@ protocol RocketInfoPresenterProtocol: AnyObject {
     func tapLaunchesButton()
     func tapSettingButton()
     var rockets: [Rocket]? { get set }
+    var rocketsImageURL: [String]? { get set }
     var rocketsImage: UIImage { get set }
-    func reload() 
+    func reload()
+    func fetchRocketsData() 
 }
 
 class RocketInfoPresenter: RocketInfoPresenterProtocol {
@@ -27,6 +30,7 @@ class RocketInfoPresenter: RocketInfoPresenterProtocol {
     let networkService: NetworkServiceProtocol?
     var router: RouterProtocol?
     var rockets: [Rocket]?
+    var rocketsImageURL: [String]?
     var rocketsImage = UIImage()
     let defaults = UserDefaultsStorage()
     
@@ -35,7 +39,6 @@ class RocketInfoPresenter: RocketInfoPresenterProtocol {
         self.networkService = networkService
         self.router = router
         fetchRocketsData()
-        fetchRocketsImage()
     }
     
     func tapLaunchesButton() {
@@ -53,6 +56,8 @@ class RocketInfoPresenter: RocketInfoPresenterProtocol {
                 switch result {
                 case let .success(Rocket):
                     self.rockets = Rocket
+                    self.rocketsImageURL = self.rockets?.first?.image
+                    self.fetchRocketsImage()
                     self.view?.success()
                 case let .failure(error):
                     self.view?.failure(error: error)
@@ -63,11 +68,18 @@ class RocketInfoPresenter: RocketInfoPresenterProtocol {
     }
     
     func fetchRocketsImage() {
-        guard let rocketImage = rockets?.first?.image.first else { return }
-        networkService?.fetchRocketImage(with: rocketImage, completion: { [weak self] image in
+        guard let rocketsImageURL = rocketsImageURL?.first else { return }
+        networkService?.fetchRocketImage(with: rocketsImageURL, completion: { [weak self] result in
             DispatchQueue.main.async {
                 guard let self = self else { return }
-                self.rocketsImage = image ?? UIImage()
+                switch result {
+                case let .success(image):
+                    self.rocketsImage = image ?? UIImage()
+                    self.view?.setupDisplay()
+                case let .failure(error):
+                    self.view?.failure(error: error)
+                }
+                return
             }
         })
     }
@@ -75,7 +87,7 @@ class RocketInfoPresenter: RocketInfoPresenterProtocol {
     func reload() {
         router?.saveCompletion = {
             self.view?.success()
-           }
+        }
     }
 }
 

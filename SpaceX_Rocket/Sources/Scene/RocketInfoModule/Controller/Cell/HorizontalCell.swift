@@ -9,12 +9,14 @@ import UIKit
 
 class HorizontalCell: UICollectionViewCell {
     // MARK: - Constants
+    
     enum Metric {
         static let indent: CGFloat = 11
         static let viewRadius: CGFloat = 28
     }
     
     // MARK: - Properties
+    
     static let reuseID = "HorizontalCell"
     
     lazy var cellView: UIView = {
@@ -41,6 +43,7 @@ class HorizontalCell: UICollectionViewCell {
     }()
     
     // MARK: - Initialization
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         configure()
@@ -52,6 +55,7 @@ class HorizontalCell: UICollectionViewCell {
 }
 
 // MARK: - Configuration
+
 extension HorizontalCell {
     
     func configure() {

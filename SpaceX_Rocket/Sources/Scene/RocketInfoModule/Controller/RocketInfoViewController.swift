@@ -8,7 +8,6 @@
 import UIKit
 
 class RocketInfoViewController: UIViewController, UICollectionViewDelegate {
-    
     // MARK: - Properties
     
     private var rocketInfoView: RocketInfoView? {
@@ -24,6 +23,7 @@ class RocketInfoViewController: UIViewController, UICollectionViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupDisplay()
         setupActions()
     }
     
@@ -31,13 +31,10 @@ class RocketInfoViewController: UIViewController, UICollectionViewDelegate {
         super.viewDidAppear(animated)
         success()
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-    }
 }
 
 // MARK: - Settings
+
 extension RocketInfoViewController {
     
     func setupView() {
@@ -56,24 +53,26 @@ extension RocketInfoViewController {
 }
 
 // MARK: - RocketViewProtocol
+
 extension RocketInfoViewController: RocketViewProtocol {
+    
     func success() {
         rocketInfoView?.tableView.reloadData()
         rocketInfoView?.collectionView.reloadData()
-        
-// вынести в другую функцию - showDisplay
-        rocketInfoView?.rocketName.text = presenter?.rockets?.first?.rocketName
-//        func setBackgroundImage(from data: Data) {
-//            backgroundImageView.image = UIImage(data: data)
-//        }
     }
     
-    func failure(error: Error) {
-       //  вывести allert
+    func setupDisplay() {
+        rocketInfoView?.rocketName.text = presenter?.rockets?.first?.rocketName
+        rocketInfoView?.imageView.image = presenter?.rocketsImage
+    }
+    
+    func failure(error: NetworkError) {
+        self.showError(error)
     }
 }
 
 // MARK: - UICollectionViewDataSource
+
 extension RocketInfoViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -170,122 +169,119 @@ extension RocketInfoViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         configuration.textProperties.adjustsFontSizeToFitWidth = true
         
-// уменьшить текст, т.к. не убирается название страны и дата
-        
         if let rocket = self.presenter?.rockets?.first {
-
-        switch indexPath.section {
             
-        case 0:
-            switch indexPath.row {
+            switch indexPath.section {
+                
             case 0:
-                configuration.text = Strings.firstLaunch
-                label.text = "\(rocket.firstFlightToPresent)"
-                label.minimumScaleFactor = 0.5
-                label.adjustsFontSizeToFitWidth = true
-            case 1:
-                configuration.text = Strings.country
-                label.text = "\(rocket.country)"
-            case 2:
-                configuration.text = Strings.coastLaunch
-                label.text = "\(rocket.coastLaunch)" + Strings.million
-            default: configuration.image = nil
-            }
-            
-        case 1:
-            switch indexPath.row {
-            case 0:
-                configuration.text = Strings.numberOfEngines
-                label.textColor = .systemGray
-                label.text = Strings.whitespace
-                cell.quantityLabel.text = "\(rocket.firstStage.engines)"
-            case 1:
-                configuration.text = Strings.fuelAmount
-                label.textColor = .systemGray
-                label.font = UIFont.boldSystemFont(ofSize: 17)
-                label.text = Strings.tons
-                cell.quantityLabel.text = "\(rocket.firstStage.fuelAmount)"
-            case 2:
-                configuration.text = Strings.burnTime
-                label.textColor = .systemGray
-                label.font = UIFont.boldSystemFont(ofSize: 17)
-                label.text = Strings.seconds
-                if  let burnTime = rocket.firstStage.burnTime {
-                cell.quantityLabel.text = "\(burnTime)"
-                } else {
-                cell.quantityLabel.text = "⏤"
+                switch indexPath.row {
+                case 0:
+                    configuration.text = Strings.firstLaunch
+                    label.text = "\(rocket.firstFlightToPresent)"
+                    label.minimumScaleFactor = 0.5
+                    label.adjustsFontSizeToFitWidth = true
+                case 1:
+                    configuration.text = Strings.country
+                    label.text = "\(rocket.country)"
+                case 2:
+                    configuration.text = Strings.coastLaunch
+                    label.text = "\(rocket.coastLaunch)" + Strings.million
+                default: configuration.image = nil
                 }
-            default: configuration.image = nil
-            }
-            
-        case 2:
-            switch indexPath.row {
-            case 0:
-                configuration.text = Strings.numberOfEngines
-                label.textColor = .systemGray
-                label.text = Strings.whitespace
-                cell.quantityLabel.text = "\(rocket.secondStage.engines)"
+                
             case 1:
-                configuration.text = Strings.fuelAmount
-                label.textColor = .systemGray
-                label.font = UIFont.boldSystemFont(ofSize: 17)
-                label.text = Strings.tons
-                cell.quantityLabel.text = "\(rocket.secondStage.fuelAmount)"
-            case 2:
-                configuration.text = Strings.burnTime
-                label.textColor = .systemGray
-                label.font = UIFont.boldSystemFont(ofSize: 17)
-                label.text = Strings.seconds
-                if  let burnTime = rocket.secondStage.burnTime {
-                cell.quantityLabel.text = "\(burnTime)"
-                } else {
-                cell.quantityLabel.text = "⏤"
+                switch indexPath.row {
+                case 0:
+                    configuration.text = Strings.numberOfEngines
+                    label.textColor = .systemGray
+                    label.text = Strings.whitespace
+                    cell.quantityLabel.text = "\(rocket.firstStage.engines)"
+                case 1:
+                    configuration.text = Strings.fuelAmount
+                    label.textColor = .systemGray
+                    label.font = UIFont.boldSystemFont(ofSize: 17)
+                    label.text = Strings.tons
+                    cell.quantityLabel.text = "\(rocket.firstStage.fuelAmount)"
+                case 2:
+                    configuration.text = Strings.burnTime
+                    label.textColor = .systemGray
+                    label.font = UIFont.boldSystemFont(ofSize: 17)
+                    label.text = Strings.seconds
+                    if  let burnTime = rocket.firstStage.burnTime {
+                        cell.quantityLabel.text = "\(burnTime)"
+                    } else {
+                        cell.quantityLabel.text = "⏤"
+                    }
+                default: configuration.image = nil
                 }
-            default: configuration.image = nil
+                
+            case 2:
+                switch indexPath.row {
+                case 0:
+                    configuration.text = Strings.numberOfEngines
+                    label.textColor = .systemGray
+                    label.text = Strings.whitespace
+                    cell.quantityLabel.text = "\(rocket.secondStage.engines)"
+                case 1:
+                    configuration.text = Strings.fuelAmount
+                    label.textColor = .systemGray
+                    label.font = UIFont.boldSystemFont(ofSize: 17)
+                    label.text = Strings.tons
+                    cell.quantityLabel.text = "\(rocket.secondStage.fuelAmount)"
+                case 2:
+                    configuration.text = Strings.burnTime
+                    label.textColor = .systemGray
+                    label.font = UIFont.boldSystemFont(ofSize: 17)
+                    label.text = Strings.seconds
+                    if  let burnTime = rocket.secondStage.burnTime {
+                        cell.quantityLabel.text = "\(burnTime)"
+                    } else {
+                        cell.quantityLabel.text = "⏤"
+                    }
+                default: configuration.image = nil
+                }
+            default: break
             }
-        default: break
         }
-            }
-            
-    
         cell.contentConfiguration = configuration
         return cell
-}
+    }
 }
 
 // MARK: - UITableViewDelegate
+
 extension RocketInfoViewController: UITableViewDelegate {
-        
-        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return 52
-        }
-        
-        func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-            let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: Metric.tableViewHeaderHeight))
-            
-            let label = UILabel()
-            
-            label.frame = CGRect.init(x: 19, y: 0, width: headerView.frame.width, height: headerView.frame.height)
-            label.font = UIFont.boldSystemFont(ofSize: 20.0)
-            label.textColor = .white
-            
-            switch section {
-            case 0:
-                label.text = nil
-            case 1:
-                label.text = Strings.firstStage
-            case 2:
-                label.text = Strings.secondStage
-            default:
-                label.text = nil
-            }
-            
-            headerView.addSubview(label)
-            return headerView
-        }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 52
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: Metric.tableViewHeaderHeight))
+        
+        let label = UILabel()
+        
+        label.frame = CGRect.init(x: 19, y: 0, width: headerView.frame.width, height: headerView.frame.height)
+        label.font = UIFont.boldSystemFont(ofSize: 20.0)
+        label.textColor = .white
+        
+        switch section {
+        case 0:
+            label.text = nil
+        case 1:
+            label.text = Strings.firstStage
+        case 2:
+            label.text = Strings.secondStage
+        default:
+            label.text = nil
+        }
+        headerView.addSubview(label)
+        return headerView
+    }
+}
 
 // MARK: - Actions
+
 extension RocketInfoViewController {
     
     @objc
@@ -299,38 +295,19 @@ extension RocketInfoViewController {
     }
 }
 
-// MARK: - Constants
+// MARK: - Private
+
 extension RocketInfoViewController {
     
-    // вынести все метрики в расширения для всех VC
-    // + проверить имена, назывние функций, убрать сокрашения типа VC из имен
-    
-    enum Metric {
-        static let tableViewHeaderHeight: CGFloat = 50
+    func showError(_ error: NetworkError) {
+        rocketInfoView?.isHidden = true
+        let alert = UIAlertController(title: "Что-то пошло не так...", message: error.localizedDescription, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: (restart))
+        alert.addAction(action)
+        present(alert, animated: true)
     }
     
-    enum Strings {
-        static let heightParameterMeter: String = "Высота, m"
-        static let heightParameterFeet: String = "Высота, ft"
-        static let diameterParameterMeter: String = "Диаметр, m"
-        static let diameterParameterFeet: String = "Диаметр, ft"
-        static let massParameterKg: String = "Масса, kg"
-        static let massParameterLb: String = "Масса, lb"
-        static let payloadParameterKg: String = "Нагрузка, kg"
-        static let payloadParameterLb: String = "Нагрузка, lb"
-        static let firstLaunch: String = "Первый запуск"
-        static let country: String = "Страна"
-        static let coastLaunch: String = "Cтоимость запуска"
-        static let million: String = " млн"
-        static let numberOfEngines: String = "Количество двигателей"
-        static let whitespace: String = "   "
-        static let fuelAmount: String = "Количество топлива"
-        static let tons: String = "ton"
-        static let burnTime: String = "Время сгорания"
-        static let seconds: String = "sec"
-        static let firstStage: String = "Первая ступень"
-        static let secondStage: String = "Вторая ступень"
+    func restart(action: UIAlertAction) {
+        presenter?.fetchRocketsData()
     }
 }
-
-
