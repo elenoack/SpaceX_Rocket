@@ -7,27 +7,21 @@
 
 import Foundation
 
-//  ПОТОМ ДОДЕЛАЮ, убрать то, что не нужно и проверить норм ли все
-
 enum NetworkError: Error, LocalizedError {
     
     case badURL
     case badJSON
-    case notFound
-    case noInternet
+    case serverError
     
     var errorDescription: String? {
         switch self {
         case .badURL:
-            return "Bad URL"
+            return "Невалидный URL-адрес"
         case .badJSON:
-            return "Can't load data"
-        case .notFound:
-            return ""
-        case .noInternet:
-            return "Please check your internet connection and try again"
+            return "Не удается загрузить данные"
+        case .serverError:
+            return "Сервер не отвечает. Повторите попытку позже"
         }
     }
-    
 }
 

@@ -7,47 +7,57 @@
 
 import UIKit
 
+struct Сonfiguration {
+    
+    static let baseURL = "https://api.spacexdata.com/v4/"
+    static let rocketsEndPoint = "rockets"
+    static let launchesEndPoint = "launches"
+}
+
 protocol NetworkServiceProtocol {
     
     func fetchRocketsData( completion: @escaping (Result<[Rocket], NetworkError>) -> Void)
     func fetchLaunchesData( completion: @escaping (Result<[Rocket], NetworkError>) -> Void)
-    func fetchRocketImage(with name: String, completion: @escaping (UIImage?) -> Void)
+    func fetchRocketImage(with name: String, completion:  @escaping (Result<(UIImage?), NetworkError>) -> Void)
 }
 
 class NetworkService: NetworkServiceProtocol {
-
-    let baseURL = "https://api.spacexdata.com/v4/"
-    let rocketsEndPoint = "rockets"
-    let launchesEndPoint = "launches"
     
     func fetchRocketsData( completion: @escaping (Result<[Rocket], NetworkError>) -> Void) {
-        getData(url: baseURL,
-                endpoint: rocketsEndPoint,
+        getData(url: Сonfiguration.baseURL,
+                endpoint:  Сonfiguration.rocketsEndPoint,
                 completion: completion)
     }
     
     func fetchLaunchesData( completion: @escaping (Result<[Rocket], NetworkError>) -> Void) {
-        getData(url: baseURL,
-                endpoint: launchesEndPoint,
+        getData(url:  Сonfiguration.baseURL,
+                endpoint:  Сonfiguration.launchesEndPoint,
                 completion: completion)
     }
     
-    func fetchRocketImage(with name: String, completion: @escaping (UIImage?) -> Void) {
+    func fetchRocketImage(with name: String, completion:  @escaping (Result<(UIImage?), NetworkError>) -> Void) {
         guard let url = URL(string: name) else {
-            completion(nil)
+            completion(.failure(.badURL))
+            print(NetworkError.badURL.localizedDescription)
             return
         }
-        URLSession.shared.dataTask(with: url) { data, _, _ in
-            if let data = data {
-                completion(UIImage(data: data))
-            } else {
-                completion(nil)
-            }
-        }.resume()
+        
+        DispatchQueue.global().async {
+            URLSession.shared.dataTask(with: url) { data, _, _ in
+                if let data = data {
+                    completion(.success(UIImage(data: data)))
+                } else {
+                    completion(.failure(.badJSON))
+                    print(NetworkError.badJSON.localizedDescription)
+                    return
+                }
+            }.resume()
+        }
     }
 }
 
 // MARK: - Private
+
 private extension NetworkService {
     
     func getData<T: Decodable>(url: String,
@@ -62,8 +72,8 @@ private extension NetworkService {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let response = response as? HTTPURLResponse,
                   (200...299).contains(response.statusCode) else {
-                completion(.failure(.notFound))
-                print(NetworkError.notFound.localizedDescription)
+                completion(.failure(.serverError))
+                print(NetworkError.serverError.localizedDescription)
                 return
             }
             

@@ -8,8 +8,6 @@
 import Foundation
 // MARK: - Rocket
 
-//  ничего не трогать! + распарсить JSON для запусков. имена делать короче 
-
 struct Rocket: Decodable {
     
     let rocketName: String
@@ -26,27 +24,26 @@ struct Rocket: Decodable {
     let firstFlight: String
     
     var firstFlightToPresent: String {
-         reformat(inputDate: firstFlight)
-     }
+        reformat(inputDate: firstFlight)
+    }
     
-     private func reformat(inputDate: String) -> String {
-         let inputFormatter = DateFormatter()
-         inputFormatter.dateFormat = "yyyy-MM-dd"
-         
-         if let date = inputFormatter.date(from: inputDate) {
-             let outputFormatter = DateFormatter()
-             outputFormatter.locale = Locale(identifier: "ru_RU")
-             outputFormatter.setLocalizedDateFormatFromTemplate("MMMMddYYYY")
-             let outputDate = outputFormatter.string(from: date)
-             return outputDate
-         } else {
-             return inputDate
-         }
-     }
-   
+    private func reformat(inputDate: String) -> String {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd"
+        
+        if let date = inputFormatter.date(from: inputDate) {
+            let outputFormatter = DateFormatter()
+            outputFormatter.locale = Locale(identifier: "ru_RU")
+            outputFormatter.setLocalizedDateFormatFromTemplate("MMMMddYYYY")
+            let outputDate = outputFormatter.string(from: date)
+            return outputDate
+        } else {
+            return inputDate
+        }
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id, height, diameter, mass
-//        case id, height, diameter, mass, country, case, secondStage
         case image = "flickr_images"
         case rocketName = "name"
         case payload = "payload_weights"
@@ -78,15 +75,15 @@ struct Payload: Decodable {
 //MARK: - FirstStage
 
 struct FirstStage: Decodable {
-      let engines: Int
-      let fuelAmount: Double
-      let burnTime: Int?
-
-      enum CodingKeys: String, CodingKey {
-          case engines
-          case fuelAmount = "fuel_amount_tons"
-          case burnTime = "burn_time_sec"
-      }
+    let engines: Int
+    let fuelAmount: Double
+    let burnTime: Int?
+    
+    enum CodingKeys: String, CodingKey {
+        case engines
+        case fuelAmount = "fuel_amount_tons"
+        case burnTime = "burn_time_sec"
+    }
 }
 
 //MARK: - SecondStage
@@ -113,4 +110,4 @@ struct LaunchData: Decodable {
 
 
 
- 
+

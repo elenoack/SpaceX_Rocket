@@ -53,6 +53,7 @@ class SettingsViewController: UIViewController {
 }
 
 // MARK: - Actions
+
 extension SettingsViewController {
     
     @objc
@@ -67,6 +68,7 @@ extension SettingsViewController {
 }
 
 // MARK: - Constants
+
 extension SettingsViewController {
     
     enum Strings {

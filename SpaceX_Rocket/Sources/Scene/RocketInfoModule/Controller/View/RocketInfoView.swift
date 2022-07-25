@@ -7,22 +7,20 @@
 
 import UIKit
 
-  class RocketInfoView: UIView {
+class RocketInfoView: UIView {
     // MARK: - Properties
     
     weak var viewController: RocketInfoViewController?
-
+    
     //MARK: - Views
-
+    
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: Strings.imageViewTitle)
         imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = .brown
         return imageView
     }()
     
-      private lazy var scrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         let view = UIScrollView(frame: .zero)
         view.contentInsetAdjustmentBehavior = .never
         view.isPagingEnabled = true
@@ -30,7 +28,7 @@ import UIKit
         return view
     }()
     
-      private lazy var contentView: UIView = {
+    private lazy var contentView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = .black
         return view
@@ -96,30 +94,32 @@ import UIKit
         return button
     }()
     
-      // MARK: - Initial
-      init() {
-          super.init(frame: .zero)
-          commonInit()
-      }
-      
-      required init?(coder: NSCoder) {
-          super.init(coder: coder)
-          commonInit()
-      }
-      
-      private func commonInit() {
-          backgroundColor = .lightGray
-          setupHierarchy()
-          setupLayout()
-          setupContentView()
-      }
-
+    // MARK: - Initial
+    
+    init() {
+        super.init(frame: .zero)
+        commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+    
+    private func commonInit() {
+        backgroundColor = .lightGray
+        setupHierarchy()
+        setupLayout()
+        setupContentView()
+    }
+    
     // MARK: - Settings
+    
     private func setupHierarchy() {
         addSubviewsForAutoLayout([scrollView])
         scrollView.addSubviewsForAutoLayout([contentView])
     }
-
+    
     private func setupLayout() {
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -144,6 +144,7 @@ import UIKit
 }
 
 // MARK: - SettingsContentView
+
 extension RocketInfoView {
     
     func setupContentView() {
@@ -205,6 +206,7 @@ extension RocketInfoView {
 }
 
 // MARK: - Constants
+
 extension RocketInfoView {
     
     enum Metric {
