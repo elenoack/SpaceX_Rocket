@@ -7,23 +7,24 @@
 
 import UIKit
 
-class PageViewController: UIPageViewController, MainViewProtocol {
+class PageViewController: UIPageViewController, PageViewProtocol {
+   
     // MARK: - Properties
     
     let initialPage = 0
-    private var pageControl = UIPageControl()
-    var presenter: MainViewPresenterProtocol!
-    
+    var pageControl = UIPageControl()
+    var presenter: PageControlPresenterProtocol?
+    private lazy var assemblyBuilder = AssemblyModuleBuilder()
+  
     //MARK: - Views
     
-    private var pages: [UIViewController] = [RocketInfoViewController(),
-                                             RocketInfoViewController(),
-                                             RocketInfoViewController()]
+    private var pages: [UIViewController] = []
     
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupPageControl()
         setupView()
         setupLayout()
     }
@@ -33,6 +34,13 @@ class PageViewController: UIPageViewController, MainViewProtocol {
     private func setupView() {
         dataSource = self
         delegate = self
+    }
+    
+    private func setupPageControl() {
+        let router = RouterModule(navigationController: UINavigationController(), assemblyBuilder: assemblyBuilder)
+        pages = [assemblyBuilder.createRocketInfoModule(router: router),
+                 assemblyBuilder.createRocketInfoModule(router: router),
+                 assemblyBuilder.createRocketInfoModule(router: router),]
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.currentPageIndicatorTintColor = .white
         pageControl.backgroundColor = .black

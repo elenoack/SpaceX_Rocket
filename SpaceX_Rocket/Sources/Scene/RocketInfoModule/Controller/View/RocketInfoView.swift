@@ -14,7 +14,7 @@ import UIKit
 
     //MARK: - Views
 
-    private lazy var imageView: UIImageView = {
+    lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: Strings.imageViewTitle)
         imageView.contentMode = .scaleAspectFill
@@ -43,7 +43,7 @@ import UIKit
         return view
     }()
     
-    private lazy var rocketName: UILabel = {
+    lazy var rocketName: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.textColor = .white
@@ -198,9 +198,8 @@ extension RocketInfoView {
             watchLaunchesButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: Metric.collectionViewIndent),
             watchLaunchesButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Metric.rocketNameIndent),
             watchLaunchesButton.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -Metric.rocketNameIndent),
-            watchLaunchesButton.rightAnchor.constraint(equalTo: containerView.rightAnchor),
             watchLaunchesButton.heightAnchor.constraint(equalToConstant: Metric.watchLaunchesButtonHeight),
-            watchLaunchesButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50)
+            watchLaunchesButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Metric.watchLaunchesButtonBottomIndent)
         ])
     }
 }
@@ -221,6 +220,7 @@ extension RocketInfoView {
         static let collectionViewCellSize: CGFloat = 100
         static let collectionViewCellSpacing: CGFloat = 12
         static let watchLaunchesButtonHeight: CGFloat = 60
+        static let watchLaunchesButtonBottomIndent: CGFloat = 70
         static let tableViewIndent: CGFloat = 8
         static let tableViewMinusIndent: CGFloat = 28
         static let tableViewHeaderHeight: CGFloat = 50

@@ -14,22 +14,6 @@ class SettingsView: UIView {
 
   //MARK: - Views
 
-    private lazy var navVC: UINavigationController = {
-        let navVC = UINavigationController(rootViewController: SettingsViewController())
-        navVC.title = Strings.navVCTitle
-        return navVC
-    }()
-    
-    lazy var navigationButton: UIBarButtonItem = {
-        let button = UIBarButtonItem()
-        button.title = Strings.navigationButtonTitle
-        button.setTitleTextAttributes([
-            NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 19),
-            NSAttributedString.Key.foregroundColor : UIColor.white,
-        ], for: .normal)
-        return button
-    }()
-    
     private lazy var parrentStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -105,7 +89,7 @@ class SettingsView: UIView {
         return label
     }()
     
-    private lazy var heightSegmentedControl: UISegmentedControl = {
+    lazy var heightSegmentedControl: UISegmentedControl = {
         let segmentedItems = [Strings.mass, Strings.ft]
         let font = UIFont.systemFont(ofSize: 17)
         let segmentedControl = UISegmentedControl(items: segmentedItems)
@@ -117,7 +101,7 @@ class SettingsView: UIView {
         return segmentedControl
     }()
     
-    private lazy var diameterSegmentedControl: UISegmentedControl = {
+    lazy var diameterSegmentedControl: UISegmentedControl = {
         let segmentedItems = [Strings.mass, Strings.ft]
         let segmentedControl = UISegmentedControl(items: segmentedItems)
         let font = UIFont.systemFont(ofSize: 17)
@@ -129,7 +113,7 @@ class SettingsView: UIView {
         return segmentedControl
     }()
     
-    private lazy var weightSegmentedControl: UISegmentedControl = {
+    lazy var massSegmentedControl: UISegmentedControl = {
         let segmentedItems = [Strings.kg, Strings.lb]
         let segmentedControl = UISegmentedControl(items: segmentedItems)
         let font = UIFont.systemFont(ofSize: 17)
@@ -141,7 +125,7 @@ class SettingsView: UIView {
         return segmentedControl
     }()
     
-    private lazy var payloadSegmentedControl: UISegmentedControl = {
+    lazy var payloadSegmentedControl: UISegmentedControl = {
         let segmentedItems = [Strings.kg, Strings.lb]
         let segmentedControl = UISegmentedControl(items: segmentedItems)
         let font = UIFont.systemFont(ofSize: 17)
@@ -193,7 +177,7 @@ class SettingsView: UIView {
         
         thirdHorizontalStackView.addArrangedSubviewsForAutoLayout([
             weightLabel,
-            weightSegmentedControl,
+            massSegmentedControl,
         ])
         
         fourthHorizontalStackView.addArrangedSubviewsForAutoLayout([
@@ -224,8 +208,6 @@ extension SettingsView {
     }
     
     enum Strings {
-        static let navVCTitle: String = "Настройки"
-        static let navigationButtonTitle: String = "Закрыть"
         static let heightLabelTitle: String = "Высота"
         static let diameterLabelTitle: String = "Диаметр"
         static let weightLabelTitle: String = "Масса"

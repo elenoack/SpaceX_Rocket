@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LaunchListViewController: UIViewController {
+class LaunchListViewController: UIViewController, LaunchViewProtocol {
     // MARK: - Properties
     
     let rockets = ["FalconSat", "Heavy Holidays", "CRS-24 Mission"]
@@ -15,6 +15,7 @@ class LaunchListViewController: UIViewController {
         guard isViewLoaded else { return nil }
         return view as? LaunchListView
     }
+    var presenter: LaunchListPresenterProtocol?
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -77,6 +78,6 @@ extension LaunchListViewController {
     
     @objc
     func back() {
-        navigationController?.popViewController(animated: true)
+        presenter?.tapBackBarButton()
     }
 }
