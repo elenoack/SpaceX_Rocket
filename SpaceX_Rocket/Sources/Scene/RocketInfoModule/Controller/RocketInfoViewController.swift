@@ -176,6 +176,8 @@ extension RocketInfoViewController: UITableViewDataSource {
             case 0:
                 configuration.text = Strings.firstLaunch
                 label.text = "\(rocket.firstFlightToPresent)"
+                label.minimumScaleFactor = 0.5
+                label.adjustsFontSizeToFitWidth = true
             case 1:
                 configuration.text = Strings.country
                 label.text = "\(rocket.country)"
