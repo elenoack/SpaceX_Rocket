@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController, SettingsViewProtocol {
+class SettingsViewController: UIViewController {
     // MARK: - Properties
     
     private var settingsView: SettingsView? {
@@ -24,7 +24,7 @@ class SettingsViewController: UIViewController, SettingsViewProtocol {
         setupView()
         setupActions()
         setupavigationController()
-        download()
+        presenter?.downloadSettings()
     }
     
     //MARK: - Settings
@@ -32,6 +32,7 @@ class SettingsViewController: UIViewController, SettingsViewProtocol {
     private func setupView() {
         view = SettingsView()
         view.backgroundColor = .black
+        isModalInPresentation = true
     }
     
     func setupActions() {
@@ -56,13 +57,12 @@ extension SettingsViewController {
     
     @objc
     func back()  {
-        presenter?.tapBackButton()
-        // тут должны обновить collectionView на другом VC 
+    self.presenter?.tapBackButton()
     }
     
     @objc
     private func segmentDidChange(_ sender: UISegmentedControl) {
-        save()
+        presenter?.saveSettings()
     }
 }
 
@@ -76,13 +76,13 @@ extension SettingsViewController {
 
 // MARK: - Private
 
-extension SettingsViewController {
+extension SettingsViewController: SettingsViewProtocol  {
     
-    private func download() {
-            settingsView?.heightSegmentedControl.selectedSegmentIndex = defaults.unitsHeight
-            settingsView?.diameterSegmentedControl.selectedSegmentIndex = defaults.unitsDiameter
-            settingsView?.massSegmentedControl.selectedSegmentIndex = defaults.unitsMass
-            settingsView?.payloadSegmentedControl.selectedSegmentIndex = defaults.unitsPayload
+    internal func download() {
+        settingsView?.heightSegmentedControl.selectedSegmentIndex = defaults.unitsHeight
+        settingsView?.diameterSegmentedControl.selectedSegmentIndex = defaults.unitsDiameter
+        settingsView?.massSegmentedControl.selectedSegmentIndex = defaults.unitsMass
+        settingsView?.payloadSegmentedControl.selectedSegmentIndex = defaults.unitsPayload
     }
     
     func save() {
@@ -92,5 +92,5 @@ extension SettingsViewController {
         defaults.unitsPayload = settingsView?.payloadSegmentedControl.selectedSegmentIndex ?? 0
     }
 }
-    
+
   

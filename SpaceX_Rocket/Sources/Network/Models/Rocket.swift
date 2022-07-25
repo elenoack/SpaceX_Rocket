@@ -28,7 +28,7 @@ struct Rocket: Decodable {
     var firstFlightToPresent: String {
          reformat(inputDate: firstFlight)
      }
-     
+    
      private func reformat(inputDate: String) -> String {
          let inputFormatter = DateFormatter()
          inputFormatter.dateFormat = "yyyy-MM-dd"

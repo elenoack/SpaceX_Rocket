@@ -17,12 +17,14 @@ protocol RouterProtocol: RouterRocket {
     func openLaunchVC()
     func openSettingsVC()
     func backToRootVC()
-    func backToRootVCModal() 
+    func backToRootVCModal()
+    var saveCompletion: (() -> Void)? { get set }
 }
 
 class RouterModule: RouterProtocol {
     var navigationController: UINavigationController?
     var assemblyBuilder: AssemblyBuilderProtocol?
+    var saveCompletion: (() -> Void)?
     
     init(navigationController: UINavigationController,
          assemblyBuilder: AssemblyBuilderProtocol) {
@@ -63,7 +65,7 @@ class RouterModule: RouterProtocol {
     
     func backToRootVCModal() {
         if let navigationController = navigationController {
-            navigationController.dismiss(animated: true)
+            navigationController.dismiss(animated: true, completion: saveCompletion)
         }
     }
     
