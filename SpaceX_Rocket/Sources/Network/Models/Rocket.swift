@@ -19,6 +19,7 @@ struct Rocket: Decodable {
     let diameter: Length
     let mass: Mass
     let payload: [Payload]
+    let country: String = "США"
     let coastLaunch: Int
     let firstStage: FirstStage
     let secondStage: SecondStage
@@ -28,10 +29,6 @@ struct Rocket: Decodable {
          reformat(inputDate: firstFlight)
      }
     
-    var countryName: String {
-        return "США"
-    }
-     
      private func reformat(inputDate: String) -> String {
          let inputFormatter = DateFormatter()
          inputFormatter.dateFormat = "yyyy-MM-dd"
@@ -48,7 +45,7 @@ struct Rocket: Decodable {
      }
    
     enum CodingKeys: String, CodingKey {
-        case id, height, diameter, mass,
+        case id, height, diameter, mass
 //        case id, height, diameter, mass, country, case, secondStage
         case image = "flickr_images"
         case rocketName = "name"
