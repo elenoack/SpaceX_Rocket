@@ -8,9 +8,16 @@
 import UIKit
 
 class LaunchListViewController: UIViewController, LaunchViewProtocol {
+    func success() {
+        launchListView?.tableView.reloadData()
+    }
+    
+    func failure(error: Error) {
+        //тут что то будет типа алерта
+    }
+    
     // MARK: - Properties
     
-    let rockets = ["FalconSat", "Heavy Holidays", "CRS-24 Mission"]
     private var launchListView: LaunchListView? {
         guard isViewLoaded else { return nil }
         return view as? LaunchListView
@@ -41,7 +48,7 @@ class LaunchListViewController: UIViewController, LaunchViewProtocol {
 extension LaunchListViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        rockets.count
+        presenter?.launches?.count ?? 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,9 +56,20 @@ extension LaunchListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: LaunchListCell.reuseId, for: indexPath) as? LaunchListCell else { return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: LaunchListCell.reuseId, for: indexPath) as? LaunchListCell else { return LaunchListCell()}
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
+        
+        guard let rows = presenter?.launches else { return cell}
+        let row = rows[indexPath.section]
+        cell.dateLabel.text = row.dateFlightToSpace
+            cell.nameLabel.text = row.name
+            if row.success == true {
+                    cell.launchImage.image = UIImage(named: "ok")
+                } else {
+                    cell.launchImage.image = UIImage(named: "fail")
+                }
+ 
         return cell
     }
     

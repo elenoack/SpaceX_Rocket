@@ -9,8 +9,8 @@ import UIKit
 
 protocol NetworkServiceProtocol {
     
-    func fetchRocketsData( completion: @escaping (Result<[Rocket], NetworkError>) -> Void)
-    func fetchLaunchesData( completion: @escaping (Result<[Rocket], NetworkError>) -> Void)
+    func fetchRocketsData( completion: @escaping (Result<[RocketData], NetworkError>) -> Void)
+    func fetchLaunchesData( completion: @escaping (Result<[LaunchData], NetworkError>) -> Void)
     func fetchRocketImage(with name: String, completion: @escaping (UIImage?) -> Void)
 }
 
@@ -20,13 +20,13 @@ class NetworkService: NetworkServiceProtocol {
     let rocketsEndPoint = "rockets"
     let launchesEndPoint = "launches"
     
-    func fetchRocketsData( completion: @escaping (Result<[Rocket], NetworkError>) -> Void) {
+    func fetchRocketsData( completion: @escaping (Result<[RocketData], NetworkError>) -> Void) {
         getData(url: baseURL,
                 endpoint: rocketsEndPoint,
                 completion: completion)
     }
     
-    func fetchLaunchesData( completion: @escaping (Result<[Rocket], NetworkError>) -> Void) {
+    func fetchLaunchesData( completion: @escaping (Result<[LaunchData], NetworkError>) -> Void) {
         getData(url: baseURL,
                 endpoint: launchesEndPoint,
                 completion: completion)

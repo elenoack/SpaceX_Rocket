@@ -14,7 +14,7 @@ protocol RouterRocket {
 
 protocol RouterProtocol: RouterRocket {
     func initViewController()
-    func openLaunchVC()
+    func openLaunchVC(rocketId: String)
     func openSettingsVC()
     func backToRootVC()
     func backToRootVCModal()
@@ -39,11 +39,11 @@ class RouterModule: RouterProtocol {
         }
     }
     
-    func openLaunchVC() {
+    func openLaunchVC(rocketId: String) {
         if let navigationController = navigationController {
             navigationController.navigationItem.backButtonTitle = "Назад"
             navigationController.title = "Имя"
-            guard let launchListViewController = assemblyBuilder?.createLaunchListModule(router: self) else { return }
+            guard let launchListViewController = assemblyBuilder?.createLaunchListModule(router: self, rocketId: rocketId) else { return }
             navigationController.pushViewController(launchListViewController, animated: true)
           }
         }
