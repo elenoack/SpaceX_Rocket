@@ -62,7 +62,7 @@ extension RocketInfoViewController: RocketViewProtocol {
     }
     
     func setupDisplay() {
-        rocketInfoView?.rocketName.text = presenter?.rockets?.first?.rocketName
+        rocketInfoView?.rocketName.text = presenter?.rockets?[2].rocketName
         rocketInfoView?.imageView.image = presenter?.rocketsImage
     }
     
