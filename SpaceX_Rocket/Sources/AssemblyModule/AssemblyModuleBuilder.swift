@@ -10,7 +10,7 @@ import UIKit
 protocol AssemblyBuilderProtocol {
     func createPageControlRocketModule(router: RouterModule) -> UIViewController
     func createRocketInfoModule(router: RouterModule) -> UIViewController
-    func createLaunchListModule(router: RouterModule) -> UIViewController
+    func createLaunchListModule(router: RouterModule, rocketId: String) -> UIViewController
     func createSettingModule(router: RouterModule) -> UIViewController
 }
 
@@ -38,12 +38,11 @@ class AssemblyModuleBuilder: AssemblyBuilderProtocol {
         return view
     }
 
-    func createLaunchListModule(router: RouterModule) -> UIViewController {
+    func createLaunchListModule(router: RouterModule, rocketId: String) -> UIViewController {
         let networkService = NetworkService()
         let view = LaunchListViewController()
-        let presenter = LaunchListPresenter(view: view,
-                                            networkService: networkService,
-                                            router: router)
+  
+        let presenter = LaunchListPresenter(view: view, networkService: networkService, router: router, rocketId: rocketId)
         view.presenter = presenter
         return view
     }

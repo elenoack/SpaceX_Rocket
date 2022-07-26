@@ -287,7 +287,7 @@ extension RocketInfoViewController {
     
     @objc
     func openLaunchVC()  {
-        self.presenter?.tapLaunchesButton()
+        self.presenter?.tapLaunchesButton(rocketId: (presenter?.rockets?.first?.id)!  )
     }
     
     @objc

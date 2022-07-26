@@ -20,31 +20,28 @@ class LaunchListCell: UITableViewCell {
         return stackView
     }()
     
-    private lazy var nameLabel: UILabel = {
+     lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "testData"
         label.textColor = .white
         label.font = .systemFont(ofSize: 20, weight: .semibold)
         return label
     }()
     
-    private lazy var dateLabel: UILabel = {
+     lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "testData"
         label.textColor = .lightGray
         label.font = .systemFont(ofSize: 20, weight: .light)
         return label
     }()
     
-    private lazy var launchImage: UIImageView = {
+     lazy var launchImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: "ok")
         return imageView
     }()
     

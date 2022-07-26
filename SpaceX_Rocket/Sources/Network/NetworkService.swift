@@ -16,9 +16,9 @@ struct Сonfiguration {
 
 protocol NetworkServiceProtocol {
     
-    func fetchRocketsData( completion: @escaping (Result<[Rocket], NetworkError>) -> Void)
-    func fetchLaunchesData( completion: @escaping (Result<[Rocket], NetworkError>) -> Void)
     func fetchRocketImage(with name: String, completion:  @escaping (Result<(UIImage?), NetworkError>) -> Void)
+    func fetchRocketsData( completion: @escaping (Result<[Rocket], NetworkError>) -> Void)
+    func fetchLaunchesData( completion: @escaping (Result<[LaunchData], NetworkError>) -> Void)
 }
 
 class NetworkService: NetworkServiceProtocol {
@@ -28,8 +28,7 @@ class NetworkService: NetworkServiceProtocol {
                 endpoint:  Сonfiguration.rocketsEndPoint,
                 completion: completion)
     }
-    
-    func fetchLaunchesData( completion: @escaping (Result<[Rocket], NetworkError>) -> Void) {
+    func fetchLaunchesData( completion: @escaping (Result<[LaunchData], NetworkError>) -> Void) {
         getData(url:  Сonfiguration.baseURL,
                 endpoint:  Сonfiguration.launchesEndPoint,
                 completion: completion)

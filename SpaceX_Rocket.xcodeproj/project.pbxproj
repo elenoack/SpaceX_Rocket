@@ -29,6 +29,7 @@
 		048D23A0285B750700A0B4FA /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D239E285B750700A0B4FA /* UIView+Constraints.swift */; };
 		048D23A3285B75D500A0B4FA /* UIStackView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D23A2285B75D500A0B4FA /* UIStackView+Constraints.swift */; };
 		048D23A5285B82B600A0B4FA /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D23A4285B82B600A0B4FA /* CustomCell.swift */; };
+		04A899BA2890249200E227F5 /* Rocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A899B92890249200E227F5 /* Rocket.swift */; };
 		04C7C39A288EE2720057481F /* RocketInfoViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C7C399288EE2720057481F /* RocketInfoViewController+Extension.swift */; };
 		04CCB6B5285A14A700543622 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCB6B4285A14A700543622 /* AppDelegate.swift */; };
 		04CCB6B9285A14A700543622 /* RocketInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCB6B8285A14A700543622 /* RocketInfoViewController.swift */; };
@@ -62,6 +63,7 @@
 		048D239E285B750700A0B4FA /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		048D23A2285B75D500A0B4FA /* UIStackView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView+Constraints.swift"; sourceTree = "<group>"; };
 		048D23A4285B82B600A0B4FA /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		04A899B92890249200E227F5 /* Rocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rocket.swift; sourceTree = "<group>"; };
 		04C7C399288EE2720057481F /* RocketInfoViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RocketInfoViewController+Extension.swift"; sourceTree = "<group>"; };
 		04CCB6B1285A14A700543622 /* SpaceX_Rocket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceX_Rocket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CCB6B4285A14A700543622 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 		A555EFF6285C775D0066B789 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				04A899B92890249200E227F5 /* Rocket.swift */,
 				A555EFF4285C6C8F0066B789 /* Rocket.swift */,
 			);
 			path = Models;
@@ -467,6 +470,7 @@
 				04396975288C06F10082EE31 /* PageControlPresenter.swift in Sources */,
 				04C7C39A288EE2720057481F /* RocketInfoViewController+Extension.swift in Sources */,
 				0467B31D288DD42D002A2474 /* UserDefaultsStorage.swift in Sources */,
+				04A899BA2890249200E227F5 /* Rocket.swift in Sources */,
 				04396970288BE0310082EE31 /* NetworkService.swift in Sources */,
 				042DC2C7288B34B3003C6F83 /* RocketInfoView.swift in Sources */,
 				048D239B285B740100A0B4FA /* HorizontalCell.swift in Sources */,
