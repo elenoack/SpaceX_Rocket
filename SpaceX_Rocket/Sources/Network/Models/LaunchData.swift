@@ -14,7 +14,7 @@ struct LaunchData: Decodable {
     var success: Bool?
     
     var firstLaunchData: String {
-        reformat(inputDate: date_local)
+        reformat(inputDate: date_local )
     }
     
     private func reformat(inputDate: String) -> String {
