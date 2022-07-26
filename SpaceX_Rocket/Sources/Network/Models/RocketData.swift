@@ -1,5 +1,5 @@
 //
-//  Rocket.swift
+//  RocketData.swift
 //  SpaceX_Rocket
 //
 //  Created by Даниил Смирнов on 17.06.2022.
@@ -8,7 +8,9 @@
 import Foundation
 // MARK: - Rocket
 
-struct Rocket: Decodable {
+//  ничего не трогать! + распарсить JSON для запусков. имена делать короче 
+
+struct RocketData: Decodable {
     
     let rocketName: String
     let image: [String]
@@ -99,15 +101,5 @@ struct SecondStage: Decodable {
         case burnTime = "burn_time_sec"
     }
 }
-
-//MARK: - LaunchData
-
-struct LaunchData: Decodable {
-    let rocketName: String
-    let launchingDate: String
-    let image: String
-}
-
-
 
 
