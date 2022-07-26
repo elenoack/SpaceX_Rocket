@@ -2,13 +2,10 @@
 //  RocketData.swift
 //  SpaceX_Rocket
 //
-//  Created by Даниил Смирнов on 17.06.2022.
+//  Created by Даниил Смирнов on 26.07.2022.
 //
 
 import Foundation
-// MARK: - Rocket
-
-//  ничего не трогать! + распарсить JSON для запусков. имена делать короче 
 
 struct RocketData: Decodable {
     
@@ -19,7 +16,7 @@ struct RocketData: Decodable {
     let diameter: Length
     let mass: Mass
     let payload: [Payload]
-    let country: String
+    let country: String = "США"
     let coastLaunch: Int
     let firstStage: FirstStage
     let secondStage: SecondStage
@@ -45,7 +42,7 @@ struct RocketData: Decodable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case id, height, diameter, mass, country
+        case id, height, diameter, mass
         case image = "flickr_images"
         case rocketName = "name"
         case payload = "payload_weights"
@@ -101,5 +98,4 @@ struct SecondStage: Decodable {
         case burnTime = "burn_time_sec"
     }
 }
-
 

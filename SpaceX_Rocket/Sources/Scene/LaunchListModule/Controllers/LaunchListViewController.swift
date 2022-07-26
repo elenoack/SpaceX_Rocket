@@ -62,7 +62,7 @@ extension LaunchListViewController: UITableViewDataSource {
         
         guard let rows = presenter?.launches else { return cell}
         let row = rows[indexPath.section]
-        cell.dateLabel.text = row.dateFlightToSpace
+        cell.dateLabel.text = row.firstLaunchData
             cell.nameLabel.text = row.name
             if row.success == true {
                     cell.launchImage.image = UIImage(named: "ok")

@@ -14,7 +14,7 @@ class PageViewController: UIPageViewController {
     var pageControl = UIPageControl()
     var presenter: PageControlPresenterProtocol?
     private lazy var assemblyBuilder = AssemblyModuleBuilder()
-    var rockets: [Rocket]?
+    var rockets: [RocketData]?
     var serialNumber: Int = 0
   
     //MARK: - Views

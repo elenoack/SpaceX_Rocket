@@ -17,7 +17,7 @@ protocol RocketInfoPresenterProtocol: AnyObject {
     init(view: RocketViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
     func tapLaunchesButton(rocketId: String)
     func tapSettingButton()
-    var rockets: [Rocket]? { get set }
+    var rockets: [RocketData]? { get set }
     var rocketsImageURL: [String]? { get set }
     var rocketsImage: UIImage { get set }
     func reload()

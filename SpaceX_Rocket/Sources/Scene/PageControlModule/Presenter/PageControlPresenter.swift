@@ -14,7 +14,7 @@ protocol PageViewProtocol: AnyObject {
 
 protocol PageControlPresenterProtocol: AnyObject {
     init(view: PageViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
-    var rockets: [Rocket]? { get set }
+    var rockets: [RocketData]? { get set }
     func fetchRocketsData()
  
 }
@@ -24,7 +24,7 @@ class PageControlPresenter: PageControlPresenterProtocol {
     let view: PageViewProtocol?
     let networkService: NetworkServiceProtocol?
     let router: RouterProtocol?
-    var rockets: [Rocket]?
+    var rockets: [RocketData]?
     
     required init(view: PageViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
         self.view = view
