@@ -7,14 +7,15 @@
 
 import UIKit
 
-class PageViewController: UIPageViewController, PageViewProtocol {
-   
+class PageViewController: UIPageViewController {
     // MARK: - Properties
     
     let initialPage = 0
     var pageControl = UIPageControl()
     var presenter: PageControlPresenterProtocol?
     private lazy var assemblyBuilder = AssemblyModuleBuilder()
+    var rockets: [Rocket]?
+    var serialNumber: Int = 0
   
     //MARK: - Views
     
@@ -24,7 +25,6 @@ class PageViewController: UIPageViewController, PageViewProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupPageControl()
         setupView()
         setupLayout()
     }
@@ -38,9 +38,12 @@ class PageViewController: UIPageViewController, PageViewProtocol {
     
     private func setupPageControl() {
         let router = RouterModule(navigationController: UINavigationController(), assemblyBuilder: assemblyBuilder)
-        pages = [assemblyBuilder.createRocketInfoModule(router: router),
-                 assemblyBuilder.createRocketInfoModule(router: router),
-                 assemblyBuilder.createRocketInfoModule(router: router),]
+        guard let rockets = presenter?.rockets?.count else { return }
+        for serialNumber in 0..<rockets {
+            pages.append(assemblyBuilder.createRocketInfoModule(router: router))
+            self.serialNumber = serialNumber
+        }
+
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.currentPageIndicatorTintColor = .white
         pageControl.backgroundColor = .black
@@ -104,7 +107,18 @@ extension PageViewController: UIPageViewControllerDelegate {
 extension PageViewController {
     
     @objc func tapped(_ sender: UIPageControl) {
+        
+        
         setViewControllers([pages[sender.currentPage]], direction: .forward, animated: true, completion: nil)
+    }
+}
+
+// MARK: - Actions
+
+extension PageViewController: PageViewProtocol {
+    
+    func success(withNumber: Int) {
+        setupPageControl()
     }
 }
 

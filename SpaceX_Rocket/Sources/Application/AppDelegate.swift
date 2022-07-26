@@ -13,10 +13,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let navigationController = UINavigationController()
     let assemblyBuilder = AssemblyModuleBuilder()
- 
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
+     
         let router = RouterModule(navigationController: navigationController, assemblyBuilder: assemblyBuilder)
         router.initViewController()
         navigationController.isNavigationBarHidden = true

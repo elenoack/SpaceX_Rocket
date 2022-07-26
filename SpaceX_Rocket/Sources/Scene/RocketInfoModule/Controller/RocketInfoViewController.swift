@@ -168,7 +168,7 @@ extension RocketInfoViewController: UITableViewDataSource {
         cell.accessoryView = label
         cell.selectionStyle = .none
         configuration.textProperties.adjustsFontSizeToFitWidth = true
-        
+  
         if let rocket = self.presenter?.rockets?.first {
             
             switch indexPath.section {
@@ -182,7 +182,8 @@ extension RocketInfoViewController: UITableViewDataSource {
                     label.adjustsFontSizeToFitWidth = true
                 case 1:
                     configuration.text = Strings.country
-                    label.text = "\(rocket.country)"
+                    label.text = presenter?.localeСountryName()
+                    label.adjustsFontSizeToFitWidth = true
                 case 2:
                     configuration.text = Strings.coastLaunch
                     label.text = "\(rocket.coastLaunch)" + Strings.million

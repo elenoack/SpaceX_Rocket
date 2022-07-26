@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AssemblyBuilderProtocol {
-//    func createPageControlRocketModule(router: RouterModule) -> UIViewController
+    func createPageControlRocketModule(router: RouterModule) -> UIViewController
     func createRocketInfoModule(router: RouterModule) -> UIViewController
     func createLaunchListModule(router: RouterModule) -> UIViewController
     func createSettingModule(router: RouterModule) -> UIViewController
@@ -16,18 +16,24 @@ protocol AssemblyBuilderProtocol {
 
 class AssemblyModuleBuilder: AssemblyBuilderProtocol {
   
-//    func createPageControlRocketModule(router: RouterModule) -> UIViewController {
-//        let networkService = NetworkService()
-//        let view = PageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-//        let presenter = PageControlPresenter(view: view, networkService: networkService, router: router)
-//        view.presenter = presenter 
-//        return view
-//    }
+    func createPageControlRocketModule(router: RouterModule) -> UIViewController {
+        let networkService = NetworkService()
+        let view = PageViewController(transitionStyle: .scroll,
+                                      navigationOrientation: .horizontal,
+                                      options: nil)
+        let presenter = PageControlPresenter(view: view,
+                                             networkService: networkService,
+                                             router: router)
+        view.presenter = presenter
+        return view
+    }
     
     func createRocketInfoModule(router: RouterModule) -> UIViewController {
         let networkService = NetworkService()
         let view = RocketInfoViewController()
-        let presenter = RocketInfoPresenter(view: view, networkService: networkService, router: router)
+        let presenter = RocketInfoPresenter(view: view,
+                                            networkService: networkService,
+                                            router: router)
         view.presenter = presenter
         return view
     }
@@ -35,7 +41,9 @@ class AssemblyModuleBuilder: AssemblyBuilderProtocol {
     func createLaunchListModule(router: RouterModule) -> UIViewController {
         let networkService = NetworkService()
         let view = LaunchListViewController()
-        let presenter = LaunchListPresenter(view: view, networkService: networkService, router: router)
+        let presenter = LaunchListPresenter(view: view,
+                                            networkService: networkService,
+                                            router: router)
         view.presenter = presenter
         return view
     }
@@ -43,7 +51,9 @@ class AssemblyModuleBuilder: AssemblyBuilderProtocol {
     func createSettingModule(router: RouterModule) -> UIViewController {
         let networkService = NetworkService()
         let view = SettingsViewController()
-        let presenter = SettingsPresenter(view: view, networkService: networkService, router: router)
+        let presenter = SettingsPresenter(view: view,
+                                          networkService: networkService,
+                                          router: router)
         view.presenter = presenter
         return view
     }

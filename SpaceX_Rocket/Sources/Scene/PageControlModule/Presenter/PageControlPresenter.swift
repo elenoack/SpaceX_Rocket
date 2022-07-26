@@ -9,11 +9,14 @@
 import UIKit
 
 protocol PageViewProtocol: AnyObject {
-  
+  func success(withNumber number: Int)
 }
 
 protocol PageControlPresenterProtocol: AnyObject {
     init(view: PageViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
+    var rockets: [Rocket]? { get set }
+    func fetchRocketsData()
+ 
 }
 
 class PageControlPresenter: PageControlPresenterProtocol {
@@ -21,12 +24,33 @@ class PageControlPresenter: PageControlPresenterProtocol {
     let view: PageViewProtocol?
     let networkService: NetworkServiceProtocol?
     let router: RouterProtocol?
+    var rockets: [Rocket]?
     
     required init(view: PageViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
         self.view = view
         self.networkService = networkService
         self.router = router
+        fetchRocketsData()
     }
+    
+    
+    func fetchRocketsData() {
+        networkService?.fetchRocketsData { [weak self] result in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                switch result {
+                case let .success(rocket):
+                    self.rockets = rocket
+                    self.view?.success(withNumber: self.rockets?.count ?? 0)
+                case .failure(_): break
+                }
+                return
+            }
+        }
+    }
+    
+    
+    
 }
 
 
