@@ -17,13 +17,13 @@ struct Сonfiguration {
 protocol NetworkServiceProtocol {
     
     func fetchRocketImage(with name: String, completion:  @escaping (Result<(UIImage?), NetworkError>) -> Void)
-    func fetchRocketsData( completion: @escaping (Result<[RocketData], NetworkError>) -> Void)
+    func fetchRocketsData( completion: @escaping (Result<[Rocket], NetworkError>) -> Void)
     func fetchLaunchesData( completion: @escaping (Result<[LaunchData], NetworkError>) -> Void)
 }
 
 class NetworkService: NetworkServiceProtocol {
     
-    func fetchRocketsData( completion: @escaping (Result<[RocketData], NetworkError>) -> Void) {
+    func fetchRocketsData( completion: @escaping (Result<[Rocket], NetworkError>) -> Void) {
         getData(url: Сonfiguration.baseURL,
                 endpoint:  Сonfiguration.rocketsEndPoint,
                 completion: completion)

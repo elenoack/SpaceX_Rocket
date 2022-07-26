@@ -19,12 +19,14 @@ protocol RouterProtocol: RouterRocket {
     func backToRootVC()
     func backToRootVCModal()
     var saveCompletion: (() -> Void)? { get set }
+
 }
 
 class RouterModule: RouterProtocol {
     var navigationController: UINavigationController?
     var assemblyBuilder: AssemblyBuilderProtocol?
     var saveCompletion: (() -> Void)?
+
     
     init(navigationController: UINavigationController,
          assemblyBuilder: AssemblyBuilderProtocol) {
@@ -34,7 +36,16 @@ class RouterModule: RouterProtocol {
     
     func initViewController() {
         if let navigationController = navigationController {
-            guard let pageViewController = assemblyBuilder?.createRocketInfoModule(router: self) else { return }
+            guard let pageViewController = assemblyBuilder?.createPageControlRocketModule(router: self) else { return }
+//            guard let rocketInfoViewController = assemblyBuilder?.createRocketInfoModule(router: self) else { return }
+//            guard let launchListViewController = assemblyBuilder?.createLaunchListModule(router: self) else { return }
+//            guard let settingsListViewController = assemblyBuilder?.createSettingModule(router: self) else { return }
+//            navigationController.setViewControllers([
+//                pageViewController,
+//                rocketInfoViewController,
+//                launchListViewController,
+//                settingsListViewController
+//            ], animated: true)
             navigationController.viewControllers = [pageViewController]
         }
     }

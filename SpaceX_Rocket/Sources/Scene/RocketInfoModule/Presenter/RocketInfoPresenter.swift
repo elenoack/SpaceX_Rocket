@@ -17,11 +17,12 @@ protocol RocketInfoPresenterProtocol: AnyObject {
     init(view: RocketViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
     func tapLaunchesButton(rocketId: String)
     func tapSettingButton()
-    var rockets: [RocketData]? { get set }
+    var rockets: [Rocket]? { get set }
     var rocketsImageURL: [String]? { get set }
     var rocketsImage: UIImage { get set }
     func reload()
-    func fetchRocketsData() 
+    func fetchRocketsData()
+    func localeСountryName() -> String?
 }
 
 class RocketInfoPresenter: RocketInfoPresenterProtocol {
@@ -54,8 +55,8 @@ class RocketInfoPresenter: RocketInfoPresenterProtocol {
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 switch result {
-                case let .success(Rocket):
-                    self.rockets = Rocket
+                case let .success(rocket):
+                    self.rockets = rocket
                     self.rocketsImageURL = self.rockets?.first?.image
                     self.fetchRocketsImage()
                     self.view?.success()
@@ -88,6 +89,14 @@ class RocketInfoPresenter: RocketInfoPresenterProtocol {
         router?.saveCompletion = {
             self.view?.success()
         }
+    }
+    
+    func localeСountryName() -> String? {
+        let countries = ["United States" : "США",
+                         "Republic of the Marshall Islands" : "Маршалловы о-ва"]
+        let key = self.rockets?.first?.country
+        let countryName = countries.filter { $0.key == key }
+        return countryName.values.first
     }
 }
 
