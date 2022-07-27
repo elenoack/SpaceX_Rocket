@@ -41,6 +41,7 @@ class LaunchListView: UIView {
     }
     
     // MARK: - Settings
+    
     private func setupHierarchy() {
         addSubview(tableView)
     }

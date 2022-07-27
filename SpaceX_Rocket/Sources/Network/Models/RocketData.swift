@@ -16,7 +16,7 @@ struct RocketData: Decodable {
     let diameter: Length
     let mass: Mass
     let payload: [Payload]
-    let country: String = "США"
+    let country: String
     let coastLaunch: Int
     let firstStage: FirstStage
     let secondStage: SecondStage
@@ -42,7 +42,7 @@ struct RocketData: Decodable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case id, height, diameter, mass
+        case id, height, diameter, mass, country
         case image = "flickr_images"
         case rocketName = "name"
         case payload = "payload_weights"

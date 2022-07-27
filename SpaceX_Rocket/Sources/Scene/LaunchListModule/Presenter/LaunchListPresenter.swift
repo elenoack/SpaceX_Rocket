@@ -9,7 +9,7 @@ import UIKit
 
 protocol LaunchViewProtocol: AnyObject {
     func success()
-    func failure(error: Error)
+    func failure(error: NetworkError)
 }
 
 protocol LaunchListPresenterProtocol: AnyObject {
@@ -17,6 +17,7 @@ protocol LaunchListPresenterProtocol: AnyObject {
     func tapBackBarButton()
     var launches: [LaunchData]? { get set }
     var rocketId: String { get }
+    func fetchLaunchesData()
 }
 
 class LaunchListPresenter: LaunchListPresenterProtocol {
@@ -32,7 +33,6 @@ class LaunchListPresenter: LaunchListPresenterProtocol {
         self.networkService = networkService
         self.router = router
         self.rocketId = rocketId
-        print(rocketId)
         fetchLaunchesData()
     }
     
@@ -51,7 +51,6 @@ class LaunchListPresenter: LaunchListPresenterProtocol {
                         data.rocket.rawValue == self.rocketId
                     }
                     self.view?.success()
-                    
                 case let .failure(error):
                     self.view?.failure(error: error)
                 }

@@ -14,15 +14,16 @@ protocol RouterRocket {
 
 protocol RouterProtocol: RouterRocket {
     func initViewController()
-    func openLaunchVC(rocketId: String)
-    func openSettingsVC()
+    func openLaunchVC(rocketId: String, viewController: UIViewController) 
+    func openSettingsVC(viewController: UIViewController)
     func backToRootVC()
-    func backToRootVCModal()
+    func backToRootVCModal(viewController: UIViewController)
     var saveCompletion: (() -> Void)? { get set }
 
 }
 
 class RouterModule: RouterProtocol {
+
     var navigationController: UINavigationController?
     var assemblyBuilder: AssemblyBuilderProtocol?
     var saveCompletion: (() -> Void)?
@@ -37,35 +38,23 @@ class RouterModule: RouterProtocol {
     func initViewController() {
         if let navigationController = navigationController {
             guard let pageViewController = assemblyBuilder?.createPageControlRocketModule(router: self) else { return }
-//            guard let rocketInfoViewController = assemblyBuilder?.createRocketInfoModule(router: self) else { return }
-//            guard let launchListViewController = assemblyBuilder?.createLaunchListModule(router: self) else { return }
-//            guard let settingsListViewController = assemblyBuilder?.createSettingModule(router: self) else { return }
-//            navigationController.setViewControllers([
-//                pageViewController,
-//                rocketInfoViewController,
-//                launchListViewController,
-//                settingsListViewController
-//            ], animated: true)
             navigationController.viewControllers = [pageViewController]
         }
     }
     
-    func openLaunchVC(rocketId: String) {
-        if let navigationController = navigationController {
-            navigationController.navigationItem.backButtonTitle = "Назад"
-            navigationController.title = "Имя"
+    func openLaunchVC(rocketId: String, viewController: UIViewController) {
+  
+            guard let pageViewController = assemblyBuilder?.createPageControlRocketModule(router: self) else { return }
             guard let launchListViewController = assemblyBuilder?.createLaunchListModule(router: self, rocketId: rocketId) else { return }
-            navigationController.pushViewController(launchListViewController, animated: true)
-        }
+            pageViewController.navigationController?.viewControllers = [viewController]
+            viewController.navigationController?.pushViewController(launchListViewController, animated: true)
     }
     
-    func openSettingsVC() {
-        if let navigationController = navigationController {
+    func openSettingsVC(viewController: UIViewController) {
             guard let settingsListViewController = assemblyBuilder?.createSettingModule(router: self) else { return }
             let navController = UINavigationController(rootViewController: settingsListViewController)
             navController.navigationBar.topItem?.title = "Настройки"
-            navigationController.present(navController, animated: true)
-        }
+            viewController.navigationController?.present(navController, animated: true)
     }
     
     func backToRootVC() {
@@ -74,10 +63,8 @@ class RouterModule: RouterProtocol {
         }
     }
     
-    func backToRootVCModal() {
-        if let navigationController = navigationController {
-            navigationController.dismiss(animated: true, completion: saveCompletion)
-        }
+    func backToRootVCModal(viewController: UIViewController) {
+        viewController.navigationController?.dismiss(animated: true, completion: saveCompletion)
     }
 }
 

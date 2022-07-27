@@ -9,13 +9,13 @@ import UIKit
 
 protocol AssemblyBuilderProtocol {
     func createPageControlRocketModule(router: RouterModule) -> UIViewController
-    func createRocketInfoModule(router: RouterModule) -> UIViewController
+    func createRocketInfoModule(router: RouterModule, with serialNumber: Int) -> UIViewController
     func createLaunchListModule(router: RouterModule, rocketId: String) -> UIViewController
     func createSettingModule(router: RouterModule) -> UIViewController
 }
 
 class AssemblyModuleBuilder: AssemblyBuilderProtocol {
-  
+ 
     func createPageControlRocketModule(router: RouterModule) -> UIViewController {
         let networkService = NetworkService()
         let view = PageViewController(transitionStyle: .scroll,
@@ -28,9 +28,9 @@ class AssemblyModuleBuilder: AssemblyBuilderProtocol {
         return view
     }
     
-    func createRocketInfoModule(router: RouterModule) -> UIViewController {
+    func createRocketInfoModule(router: RouterModule, with serialNumber: Int) -> UIViewController {
         let networkService = NetworkService()
-        let view = RocketInfoViewController()
+        let view = RocketInfoViewController(serialNumber: serialNumber)
         let presenter = RocketInfoPresenter(view: view,
                                             networkService: networkService,
                                             router: router)

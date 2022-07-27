@@ -15,14 +15,14 @@ protocol RocketViewProtocol: AnyObject {
 
 protocol RocketInfoPresenterProtocol: AnyObject {
     init(view: RocketViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
-    func tapLaunchesButton(rocketId: String)
-    func tapSettingButton()
+    func tapLaunchesButton(rocketId: String, viewController: UIViewController)
+    func tapSettingButton(viewController: UIViewController)
     var rockets: [RocketData]? { get set }
-    var rocketsImageURL: [String]? { get set }
     var rocketsImage: UIImage { get set }
     func reload()
     func fetchRocketsData()
     func localeСountryName() -> String?
+    func fetchRocketsImage(with serialNumber: Int)
 }
 
 class RocketInfoPresenter: RocketInfoPresenterProtocol {
@@ -31,7 +31,6 @@ class RocketInfoPresenter: RocketInfoPresenterProtocol {
     let networkService: NetworkServiceProtocol?
     var router: RouterProtocol?
     var rockets: [RocketData]?
-    var rocketsImageURL: [String]?
     var rocketsImage = UIImage()
     let defaults = UserDefaultsStorage()
     
@@ -42,12 +41,12 @@ class RocketInfoPresenter: RocketInfoPresenterProtocol {
         fetchRocketsData()
     }
     
-    func tapLaunchesButton(rocketId: String) {
-        router?.openLaunchVC(rocketId: rocketId)
+    func tapLaunchesButton(rocketId: String, viewController: UIViewController) {
+        router?.openLaunchVC(rocketId: rocketId, viewController: viewController)
     }
     
-    func tapSettingButton() {
-        router?.openSettingsVC()
+    func tapSettingButton(viewController: UIViewController) {
+        router?.openSettingsVC(viewController: viewController)
     }
     
     func fetchRocketsData() {
@@ -57,8 +56,6 @@ class RocketInfoPresenter: RocketInfoPresenterProtocol {
                 switch result {
                 case let .success(rocket):
                     self.rockets = rocket
-                    self.rocketsImageURL = self.rockets?.first?.image
-                    self.fetchRocketsImage()
                     self.view?.success()
                 case let .failure(error):
                     self.view?.failure(error: error)
@@ -68,9 +65,10 @@ class RocketInfoPresenter: RocketInfoPresenterProtocol {
         }
     }
     
-    func fetchRocketsImage() {
-        guard let rocketsImageURL = rocketsImageURL?.first else { return }
-        networkService?.fetchRocketImage(with: rocketsImageURL, completion: { [weak self] result in
+    func fetchRocketsImage(with serialNumber: Int) {
+        guard let rocketsImagesArrayURL = self.rockets?[serialNumber].image else { return }
+        guard let rocketImageURL = rocketsImagesArrayURL.first else { return }
+        networkService?.fetchRocketImage(with: rocketImageURL, completion: { [weak self] result in
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 switch result {
@@ -80,9 +78,10 @@ class RocketInfoPresenter: RocketInfoPresenterProtocol {
                 case let .failure(error):
                     self.view?.failure(error: error)
                 }
-                return
+                return 
             }
         })
+        
     }
     
     func reload() {
@@ -93,7 +92,7 @@ class RocketInfoPresenter: RocketInfoPresenterProtocol {
     
     func localeСountryName() -> String? {
         let countries = ["United States" : "США",
-                         "Republic of the Marshall Islands" : "Маршалловы о-ва"]
+                         "Republic of the Marshall Islands" : "Маршалловы O-ва"]
         let key = self.rockets?.first?.country
         let countryName = countries.filter { $0.key == key }
         return countryName.values.first

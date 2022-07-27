@@ -10,12 +10,11 @@ import UIKit
 class PageViewController: UIPageViewController {
     // MARK: - Properties
     
+    let pageControl = UIPageControl()
     let initialPage = 0
-    var pageControl = UIPageControl()
     var presenter: PageControlPresenterProtocol?
     private lazy var assemblyBuilder = AssemblyModuleBuilder()
     var rockets: [RocketData]?
-    var serialNumber: Int = 0
   
     //MARK: - Views
     
@@ -37,29 +36,33 @@ class PageViewController: UIPageViewController {
     }
     
     private func setupPageControl() {
+        
         let router = RouterModule(navigationController: UINavigationController(), assemblyBuilder: assemblyBuilder)
         guard let rockets = presenter?.rockets?.count else { return }
+        
         for serialNumber in 0..<rockets {
-            pages.append(assemblyBuilder.createRocketInfoModule(router: router))
-            self.serialNumber = serialNumber
-        }
-
-        pageControl.translatesAutoresizingMaskIntoConstraints = false
+            let viewController = assemblyBuilder.createRocketInfoModule(router: router, with: serialNumber)
+            let navigationController = UINavigationController(rootViewController:  viewController)
+            pages.append(navigationController)
+     }
+       
         pageControl.currentPageIndicatorTintColor = .white
         pageControl.backgroundColor = .black
         pageControl.pageIndicatorTintColor = .systemGray
         pageControl.numberOfPages = pages.count
+        pageControl.isUserInteractionEnabled = false
         pageControl.currentPage = initialPage
         pageControl.addTarget(self, action: #selector(tapped), for: .valueChanged)
+        
         setViewControllers([pages[initialPage]], direction: .forward, animated: true, completion: nil)
     }
     
     private func setupLayout() {
         view.addSubview(pageControl)
-        pageControl.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -Metric.indentTop).isActive = true
-        pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        pageControl.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+//        pageControl.translatesAutoresizingMaskIntoConstraints = false
+//        pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+//        pageControl.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+//        pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
 }
 
@@ -97,7 +100,6 @@ extension PageViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         guard let viewControllers = pageViewController.viewControllers else { return }
         guard let currentIndex = pages.firstIndex(of: viewControllers[0]) else { return }
-        
         pageControl.currentPage = currentIndex
     }
 }
@@ -107,7 +109,6 @@ extension PageViewController: UIPageViewControllerDelegate {
 extension PageViewController {
     
     @objc func tapped(_ sender: UIPageControl) {
-        
         
         setViewControllers([pages[sender.currentPage]], direction: .forward, animated: true, completion: nil)
     }

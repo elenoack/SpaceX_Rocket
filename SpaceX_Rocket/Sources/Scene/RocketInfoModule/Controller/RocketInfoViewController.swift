@@ -18,18 +18,30 @@ class RocketInfoViewController: UIViewController, UICollectionViewDelegate {
     var presenter: RocketInfoPresenterProtocol?
     let networkService = NetworkService()
     let defaults = UserDefaultsStorage()
+    var serialNumber: Int 
+  
+    // MARK: - Initial
+    
+    init(serialNumber: Int) {
+        self.serialNumber = serialNumber
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        setupDisplay()
         setupActions()
+        success()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        success()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupDisplay()
     }
 }
 
@@ -40,6 +52,7 @@ extension RocketInfoViewController {
     func setupView() {
         view = RocketInfoView()
         view.backgroundColor = .black
+        presenter?.fetchRocketsImage(with: serialNumber)
         rocketInfoView?.collectionView.dataSource = self
         rocketInfoView?.collectionView.delegate = self
         rocketInfoView?.tableView.dataSource = self
@@ -62,9 +75,10 @@ extension RocketInfoViewController: RocketViewProtocol {
     }
     
     func setupDisplay() {
-        rocketInfoView?.rocketName.text = presenter?.rockets?[2].rocketName
-        rocketInfoView?.imageView.image = presenter?.rocketsImage
+        self.rocketInfoView?.rocketName.text = self.presenter?.rockets?[self.serialNumber].rocketName
+        self.rocketInfoView?.imageView.image = self.presenter?.rocketsImage
     }
+    
     
     func failure(error: NetworkError) {
         self.showError(error)
@@ -89,8 +103,8 @@ extension RocketInfoViewController: UICollectionViewDataSource {
         }
         
         DispatchQueue.main.async {
-            if let rocket = self.presenter?.rockets?.first {
-                
+            
+            if let rocket = self.presenter?.rockets?[self.serialNumber]  {
                 switch indexPath.row {
                 case 0:
                     if self.defaults.unitsHeight < 1 {
@@ -169,7 +183,7 @@ extension RocketInfoViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         configuration.textProperties.adjustsFontSizeToFitWidth = true
   
-        if let rocket = self.presenter?.rockets?.first {
+        if let rocket = self.presenter?.rockets?[serialNumber] {
             
             switch indexPath.section {
                 
@@ -287,12 +301,13 @@ extension RocketInfoViewController {
     
     @objc
     func openLaunchVC()  {
-        self.presenter?.tapLaunchesButton(rocketId: (presenter?.rockets?.first?.id)!  )
+        guard let rocketId = presenter?.rockets?[serialNumber].id else { return }
+        self.presenter?.tapLaunchesButton(rocketId: rocketId, viewController: self)
     }
     
     @objc
     func openSettingsVC() {
-        presenter?.tapSettingButton()
+        presenter?.tapSettingButton(viewController: self)
     }
 }
 
