@@ -37,7 +37,6 @@ class NetworkService: NetworkServiceProtocol {
     func fetchRocketImage(with name: String, completion:  @escaping (Result<(UIImage?), NetworkError>) -> Void) {
         guard let url = URL(string: name) else {
             completion(.failure(.badURL))
-            print(NetworkError.badURL.localizedDescription)
             return
         }
         
@@ -47,7 +46,6 @@ class NetworkService: NetworkServiceProtocol {
                     completion(.success(UIImage(data: data)))
                 } else {
                     completion(.failure(.badJSON))
-                    print(NetworkError.badJSON.localizedDescription)
                     return
                 }
             }.resume()
@@ -64,7 +62,6 @@ private extension NetworkService {
                                completion: @escaping (Result<T, NetworkError>) -> Void) {
         guard let url = URL.url(with: url, endpoint: endpoint) else {
             completion(.failure(.badURL))
-            print(NetworkError.badURL.localizedDescription)
             return
         }
         
@@ -79,7 +76,6 @@ private extension NetworkService {
             guard let data = data,
                   let model = try? JSONDecoder().decode(T.self, from: data) else {
                 completion(.failure(.badJSON))
-                print(NetworkError.badJSON.localizedDescription)
                 return
             }
             completion(.success(model))

@@ -58,7 +58,7 @@ extension SettingsViewController {
     
     @objc
     func back()  {
-    self.presenter?.tapBackButton()
+        self.presenter?.tapBackButton(viewController: self)
     }
     
     @objc

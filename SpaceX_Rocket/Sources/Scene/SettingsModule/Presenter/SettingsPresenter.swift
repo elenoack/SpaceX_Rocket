@@ -14,7 +14,7 @@ protocol SettingsViewProtocol: AnyObject {
 
 protocol SettingsPresenterProtocol: AnyObject {
     init(view: SettingsViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
-    func tapBackButton()
+    func tapBackButton(viewController: UIViewController)
     func downloadSettings()
     func saveSettings()
 }
@@ -31,8 +31,8 @@ class SettingsPresenter: SettingsPresenterProtocol {
         self.router = router
     }
     
-    func tapBackButton() {
-        router?.backToRootVCModal()
+    func tapBackButton(viewController: UIViewController) {
+        router?.backToRootVCModal(viewController: viewController)
     }
     
     func downloadSettings() {
