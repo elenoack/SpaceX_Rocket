@@ -36,7 +36,6 @@ class RocketInfoViewController: UIViewController, UICollectionViewDelegate {
         super.viewDidLoad()
         setupView()
         setupActions()
-        success()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,8 +69,12 @@ extension RocketInfoViewController {
 extension RocketInfoViewController: RocketViewProtocol {
     
     func success() {
-        rocketInfoView?.tableView.reloadData()
-        rocketInfoView?.collectionView.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
+            rocketInfoView?.tableView.reloadData()
+            rocketInfoView?.collectionView.reloadData()
+            rocketInfoView?.activityIndicatorView.stopAnimating()
+            rocketInfoView?.blurView.isHidden = true
+        }
     }
     
     func setupDisplay() {
@@ -302,12 +305,17 @@ extension RocketInfoViewController {
     @objc
     func openLaunchVC()  {
         guard let rocketId = presenter?.rockets?[serialNumber].id else { return }
-        self.presenter?.tapLaunchesButton(rocketId: rocketId, viewController: self)
+        guard let rocketName = presenter?.rockets?[serialNumber].rocketName else { return }
+        self.presenter?.tapLaunchesButton(rocketId: rocketId, viewController: self, rocketName: rocketName)
     }
     
     @objc
     func openSettingsVC() {
+        rocketInfoView?.blurView.isHidden = false
         presenter?.tapSettingButton(viewController: self)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
+            rocketInfoView?.activityIndicatorView.startAnimating()
+        }
     }
 }
 
@@ -316,7 +324,7 @@ extension RocketInfoViewController {
 extension RocketInfoViewController {
     
     func showError(_ error: NetworkError) {
-        rocketInfoView?.isHidden = true
+        rocketInfoView?.blurView.isHidden = false
         let alert = UIAlertController(title: "Что-то пошло не так...", message: error.localizedDescription, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default, handler: (restart))
         alert.addAction(action)

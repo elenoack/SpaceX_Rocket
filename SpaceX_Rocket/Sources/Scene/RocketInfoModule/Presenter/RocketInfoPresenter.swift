@@ -15,10 +15,10 @@ protocol RocketViewProtocol: AnyObject {
 
 protocol RocketInfoPresenterProtocol: AnyObject {
     init(view: RocketViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
-    func tapLaunchesButton(rocketId: String, viewController: UIViewController)
+    func tapLaunchesButton(rocketId: String, viewController: UIViewController, rocketName: String)
     func tapSettingButton(viewController: UIViewController)
     var rockets: [RocketData]? { get set }
-    var rocketsImage: UIImage { get set }
+    var rocketsImage: UIImage { get }
     func reload()
     func fetchRocketsData()
     func localeСountryName() -> String?
@@ -41,8 +41,8 @@ class RocketInfoPresenter: RocketInfoPresenterProtocol {
         fetchRocketsData()
     }
     
-    func tapLaunchesButton(rocketId: String, viewController: UIViewController) {
-        router?.openLaunchVC(rocketId: rocketId, viewController: viewController)
+    func tapLaunchesButton(rocketId: String, viewController: UIViewController, rocketName: String) {
+        router?.openLaunchVC(rocketId: rocketId, viewController: viewController, rocketName: rocketName)
     }
     
     func tapSettingButton(viewController: UIViewController) {
@@ -67,7 +67,7 @@ class RocketInfoPresenter: RocketInfoPresenterProtocol {
     
     func fetchRocketsImage(with serialNumber: Int) {
         guard let rocketsImagesArrayURL = self.rockets?[serialNumber].image else { return }
-        guard let rocketImageURL = rocketsImagesArrayURL.first else { return }
+        guard let rocketImageURL = rocketsImagesArrayURL.randomElement() else { return }
         networkService?.fetchRocketImage(with: rocketImageURL, completion: { [weak self] result in
             DispatchQueue.main.async {
                 guard let self = self else { return }

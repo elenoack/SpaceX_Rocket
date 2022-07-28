@@ -9,14 +9,16 @@ import UIKit
 
 protocol LaunchViewProtocol: AnyObject {
     func success()
+    func successNil()
     func failure(error: NetworkError)
 }
 
 protocol LaunchListPresenterProtocol: AnyObject {
-    init(view: LaunchViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol, rocketId: String)
+    init(view: LaunchViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol, rocketId: String, rocketName: String)
     func tapBackBarButton()
     var launches: [LaunchData]? { get set }
     var rocketId: String { get }
+    var rocketName: String { get }
     func fetchLaunchesData()
 }
 
@@ -26,13 +28,15 @@ class LaunchListPresenter: LaunchListPresenterProtocol {
     let networkService: NetworkServiceProtocol?
     let router: RouterProtocol?
     let rocketId: String
+    var rocketName: String
     var launches: [LaunchData]?
     
-    required init(view: LaunchViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol, rocketId: String) {
+    required init(view: LaunchViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol, rocketId: String, rocketName: String) {
         self.view = view
         self.networkService = networkService
         self.router = router
         self.rocketId = rocketId
+        self.rocketName = rocketName
         fetchLaunchesData()
     }
     
@@ -49,6 +53,9 @@ class LaunchListPresenter: LaunchListPresenterProtocol {
                     self.launches = LaunchData
                     self.launches = self.launches?.filter { data in
                         data.rocket.rawValue == self.rocketId
+                    }
+                    if self.launches?.count == 0 {
+                        self.view?.successNil()
                     }
                     self.view?.success()
                 case let .failure(error):
