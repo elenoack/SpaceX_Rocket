@@ -23,8 +23,9 @@ class LaunchListCell: UITableViewCell {
      lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+         label.numberOfLines = 2
         label.textColor = .white
-        label.font = .systemFont(ofSize: 20, weight: .semibold)
+        label.font = .systemFont(ofSize: 17, weight: .semibold)
         return label
     }()
     
@@ -32,7 +33,7 @@ class LaunchListCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .lightGray
-        label.font = .systemFont(ofSize: 20, weight: .light)
+        label.font = .systemFont(ofSize: 15, weight: .light)
         return label
     }()
     
@@ -75,7 +76,8 @@ class LaunchListCell: UITableViewCell {
         NSLayoutConstraint.activate([
             verticalStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Metric.leadingSpacing),
             verticalStack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            
+            verticalStack.widthAnchor.constraint(equalToConstant: 200),
+
             launchImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Metric.trailingSpacing),
             launchImage.widthAnchor.constraint(equalToConstant: Metric.imageWidth),
             launchImage.heightAnchor.constraint(equalToConstant: Metric.imageHeight),

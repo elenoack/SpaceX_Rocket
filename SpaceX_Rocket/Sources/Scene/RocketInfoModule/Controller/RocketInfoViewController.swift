@@ -51,6 +51,8 @@ extension RocketInfoViewController {
     func setupView() {
         view = RocketInfoView()
         view.backgroundColor = .black
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
         presenter?.fetchRocketsImage(with: serialNumber)
         rocketInfoView?.collectionView.dataSource = self
         rocketInfoView?.collectionView.delegate = self

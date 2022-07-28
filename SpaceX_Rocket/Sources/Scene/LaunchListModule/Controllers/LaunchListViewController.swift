@@ -35,7 +35,7 @@ class LaunchListViewController: UIViewController {
     
     private func setupavigationController() {
         navigationController?.isNavigationBarHidden = false
-        navigationController?.title = presenter?.rocketName
+        title = presenter?.rocketName
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: #selector (back))
     }
 }
