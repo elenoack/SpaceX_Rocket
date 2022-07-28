@@ -14,7 +14,7 @@ protocol RouterRocket {
 
 protocol RouterProtocol: RouterRocket {
     func initViewController()
-    func openLaunchVC(rocketId: String, viewController: UIViewController) 
+    func openLaunchVC(rocketId: String, viewController: UIViewController, rocketName: String)
     func openSettingsVC(viewController: UIViewController)
     func backToRootVC()
     func backToRootVCModal(viewController: UIViewController)
@@ -28,7 +28,6 @@ class RouterModule: RouterProtocol {
     var assemblyBuilder: AssemblyBuilderProtocol?
     var saveCompletion: (() -> Void)?
 
-    
     init(navigationController: UINavigationController,
          assemblyBuilder: AssemblyBuilderProtocol) {
         self.navigationController = navigationController
@@ -42,12 +41,11 @@ class RouterModule: RouterProtocol {
         }
     }
     
-    func openLaunchVC(rocketId: String, viewController: UIViewController) {
-  
+    func openLaunchVC(rocketId: String, viewController: UIViewController, rocketName: String) {
             guard let pageViewController = assemblyBuilder?.createPageControlRocketModule(router: self) else { return }
-            guard let launchListViewController = assemblyBuilder?.createLaunchListModule(router: self, rocketId: rocketId) else { return }
+        guard let launchListViewController = assemblyBuilder?.createLaunchListModule(router: self, rocketId: rocketId, rocketName: rocketName) else { return }
             pageViewController.navigationController?.viewControllers = [viewController]
-            viewController.navigationController?.pushViewController(launchListViewController, animated: true)
+        viewController.navigationController?.pushViewController(launchListViewController, animated: true)
     }
     
     func openSettingsVC(viewController: UIViewController) {

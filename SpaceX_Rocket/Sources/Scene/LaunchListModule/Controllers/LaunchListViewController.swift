@@ -35,7 +35,7 @@ class LaunchListViewController: UIViewController {
     
     private func setupavigationController() {
         navigationController?.isNavigationBarHidden = false
-//        navigationController.title = presenter.
+        navigationController?.title = presenter?.rocketName
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: #selector (back))
     }
 }
@@ -43,9 +43,8 @@ class LaunchListViewController: UIViewController {
 //MARK: - UITableViewDataSource
 
 extension LaunchListViewController: UITableViewDataSource {
-    
     func numberOfSections(in tableView: UITableView) -> Int {
-        presenter?.launches?.count ?? 1
+        presenter?.launches?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -57,26 +56,19 @@ extension LaunchListViewController: UITableViewDataSource {
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
         
-        guard let rows = presenter?.launches else {
+            guard let rows = presenter?.launches else { return cell }
             
-            cell.dateLabel.text = "Информация отсутствует"
-            cell.launchImage.image = UIImage(systemName: "xmark.circle.fill")
-            cell.launchImage.tintColor = .red
+            let row = rows[indexPath.section]
             
-            
-//            showInfo()
-            return cell }
-        
-        let row = rows[indexPath.section]
-        cell.dateLabel.text = row.firstLaunchData
-        cell.nameLabel.text = row.name
-        if row.success == true {
-            cell.launchImage.image = UIImage(named: "ok")
-        } else {
-            cell.launchImage.image = UIImage(named: "fail")
-        }
+            cell.dateLabel.text = row.firstLaunchData
+            cell.nameLabel.text = row.name
+            if row.success == true {
+                cell.launchImage.image = UIImage(named: "ok")
+            } else {
+                cell.launchImage.image = UIImage(named: "fail")
+            }
         return cell
-    }
+        }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         100
@@ -112,7 +104,17 @@ extension LaunchListViewController {
 extension LaunchListViewController: LaunchViewProtocol {
     
     func success() {
-        launchListView?.tableView.reloadData()
+        launchListView?.activityIndicatorView.startAnimating()
+        launchListView?.blackView.isHidden = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+            launchListView?.tableView.reloadData()
+            launchListView?.activityIndicatorView.stopAnimating()
+            launchListView?.blackView.isHidden = true
+        }
+    }
+    
+    func successNil() {
+        showInfo()
     }
     
     func failure(error: NetworkError) {
@@ -125,7 +127,7 @@ extension LaunchListViewController: LaunchViewProtocol {
 extension LaunchListViewController {
     
     func showError(_ error: NetworkError) {
-        launchListView?.isHidden = true
+        launchListView?.blackView.isHidden = true
         let alert = UIAlertController(title: "Что-то пошло не так...", message: error.localizedDescription, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default, handler: (restart))
         alert.addAction(action)
@@ -136,24 +138,12 @@ extension LaunchListViewController {
         presenter?.fetchLaunchesData()
     }
     
-//    func showInfo() {
-//        launchListView?.isHidden = true
-//
-//        let alert = UIAlertController(title: "Информация отсутствует", message: "\n\n", preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "OK", style: .default, handler:(restart)))
-//        let image = UIImageView(image: UIImage(named: "notInfo"))
-//        alert.view.addSubview(image)
-//        image.translatesAutoresizingMaskIntoConstraints = false
-//        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .centerX, relatedBy: .equal, toItem: alert.view, attribute: .centerX, multiplier: 1, constant: 0))
-//        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .centerY, relatedBy: .equal, toItem: alert.view, attribute: .centerY, multiplier: 1, constant: 0))
-//        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 50.0))
-//        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 50.0))
-//        self.present(alert, animated: true, completion: nil)
-//    }
-//
-//    func backToRootVC(action: UIAlertAction) {
-//
-//    }
+    func showInfo() {
+        launchListView?.blackView.isHidden = true
+        guard let alert = launchListView?.alert else { return }
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 

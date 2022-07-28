@@ -94,6 +94,21 @@ class RocketInfoView: UIView {
         return button
     }()
     
+    lazy var activityIndicatorView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .medium)
+        view.color = .white
+        view.hidesWhenStopped = true
+        return view
+    }()
+    
+    lazy var blurView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let view = UIVisualEffectView(effect: blurEffect)
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.isHidden = true
+        return view
+    }()
+    
     // MARK: - Initial
     
     init() {
@@ -116,7 +131,9 @@ class RocketInfoView: UIView {
     // MARK: - Settings
     
     private func setupHierarchy() {
-        addSubviewsForAutoLayout([scrollView])
+        addSubviewsForAutoLayout([scrollView,
+                                  blurView,
+                                  activityIndicatorView])
         scrollView.addSubviewsForAutoLayout([contentView])
     }
     
@@ -126,6 +143,14 @@ class RocketInfoView: UIView {
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
             scrollView.topAnchor.constraint(equalTo: topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            
+            activityIndicatorView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            activityIndicatorView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+            blurView.heightAnchor.constraint(equalTo: heightAnchor),
+            blurView.widthAnchor.constraint(equalTo: widthAnchor),
+            blurView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            blurView.centerYAnchor.constraint(equalTo: centerYAnchor),
             
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
@@ -158,7 +183,7 @@ extension RocketInfoView {
             containerView,
             tableView,
             collectionView,
-            watchLaunchesButton,
+            watchLaunchesButton
         ])
         
         containerView.addSubviewsForAutoLayout([
@@ -200,7 +225,7 @@ extension RocketInfoView {
             watchLaunchesButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Metric.rocketNameIndent),
             watchLaunchesButton.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -Metric.rocketNameIndent),
             watchLaunchesButton.heightAnchor.constraint(equalToConstant: Metric.watchLaunchesButtonHeight),
-            watchLaunchesButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Metric.watchLaunchesButtonBottomIndent)
+            watchLaunchesButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Metric.watchLaunchesButtonBottomIndent),
         ])
     }
 }
