@@ -6,6 +6,7 @@
 //
 
 import UIKit
+//MARK: - RocketViewProtocol
 
 protocol RocketViewProtocol: AnyObject {
     func success()
@@ -13,9 +14,15 @@ protocol RocketViewProtocol: AnyObject {
     func setupDisplay()
 }
 
+//MARK: - RocketInfoPresenterProtocol
+
 protocol RocketInfoPresenterProtocol: AnyObject {
-    init(view: RocketViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
-    func tapLaunchesButton(rocketId: String, viewController: UIViewController, rocketName: String)
+    init(view: RocketViewProtocol,
+         networkService: NetworkServiceProtocol,
+         router: RouterProtocol)
+    func tapLaunchesButton(rocketId: String,
+                           viewController: UIViewController,
+                           rocketName: String)
     func tapSettingButton(viewController: UIViewController)
     var rockets: [RocketData]? { get set }
     var rocketsImage: UIImage { get }
@@ -25,8 +32,10 @@ protocol RocketInfoPresenterProtocol: AnyObject {
     func fetchRocketsImage(with serialNumber: Int)
 }
 
-class RocketInfoPresenter: RocketInfoPresenterProtocol {
+//MARK: - RocketInfoPresenter
 
+class RocketInfoPresenter: RocketInfoPresenterProtocol {
+    
     let view: RocketViewProtocol?
     let networkService: NetworkServiceProtocol?
     var router: RouterProtocol?
@@ -34,15 +43,25 @@ class RocketInfoPresenter: RocketInfoPresenterProtocol {
     var rocketsImage = UIImage()
     let defaults = UserDefaultsStorage()
     
-    required init(view: RocketViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
+    // MARK: - Initialization
+    
+    required init(view: RocketViewProtocol,
+                  networkService: NetworkServiceProtocol,
+                  router: RouterProtocol) {
         self.view = view
         self.networkService = networkService
         self.router = router
         fetchRocketsData()
     }
     
-    func tapLaunchesButton(rocketId: String, viewController: UIViewController, rocketName: String) {
-        router?.openLaunchVC(rocketId: rocketId, viewController: viewController, rocketName: rocketName)
+    // MARK: - Private
+    
+    func tapLaunchesButton(rocketId: String,
+                           viewController: UIViewController,
+                           rocketName: String) {
+        router?.openLaunchVC(rocketId: rocketId,
+                             viewController: viewController,
+                             rocketName: rocketName)
     }
     
     func tapSettingButton(viewController: UIViewController) {
@@ -66,11 +85,17 @@ class RocketInfoPresenter: RocketInfoPresenterProtocol {
     }
     
     func fetchRocketsImage(with serialNumber: Int) {
-        guard let rocketsImagesArrayURL = self.rockets?[serialNumber].image else { return }
-        guard let rocketImageURL = rocketsImagesArrayURL.randomElement() else { return }
+        guard let rocketsImagesArrayURL = self.rockets?[serialNumber].image
+        else {
+            return }
+        guard let rocketImageURL = rocketsImagesArrayURL.randomElement()
+        else {
+            return }
         networkService?.fetchRocketImage(with: rocketImageURL, completion: { [weak self] result in
             DispatchQueue.main.async {
-                guard let self = self else { return }
+                guard let self = self
+                else {
+                    return }
                 switch result {
                 case let .success(image):
                     self.rocketsImage = image ?? UIImage()
@@ -81,7 +106,6 @@ class RocketInfoPresenter: RocketInfoPresenterProtocol {
                 return
             }
         })
-
     }
     
     func reload() {
@@ -92,7 +116,7 @@ class RocketInfoPresenter: RocketInfoPresenterProtocol {
     
     func localeСountryName() -> String? {
         let countries = ["United States" : "США",
-                         "Republic of the Marshall Islands" : "Маршалловы O-ва"]
+                         "Republic of the Marshall Islands" : "Маршалловы о-ва"]
         let key = self.rockets?.first?.country
         let countryName = countries.filter { $0.key == key }
         return countryName.values.first

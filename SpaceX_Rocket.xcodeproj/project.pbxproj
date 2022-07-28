@@ -23,7 +23,7 @@
 		0467B31D288DD42D002A2474 /* UserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467B319288DD42D002A2474 /* UserDefaultsStorage.swift */; };
 		0467B31E288DD42D002A2474 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467B31A288DD42D002A2474 /* UserDefaultKey.swift */; };
 		0467B31F288DD42D002A2474 /* PropertyListValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467B31B288DD42D002A2474 /* PropertyListValue.swift */; };
-		046F911D288B6614008A619D /* RouterRocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F911C288B6614008A619D /* RouterRocket.swift */; };
+		046F911D288B6614008A619D /* RouterRocketProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F911C288B6614008A619D /* RouterRocketProtocol.swift */; };
 		048AD135285CA4FD00267AC1 /* RocketInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048AD134285CA4FD00267AC1 /* RocketInfoPresenter.swift */; };
 		048D239B285B740100A0B4FA /* HorizontalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D239A285B740100A0B4FA /* HorizontalCell.swift */; };
 		048D23A0285B750700A0B4FA /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D239E285B750700A0B4FA /* UIView+Constraints.swift */; };
@@ -57,7 +57,7 @@
 		0467B319288DD42D002A2474 /* UserDefaultsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorage.swift; sourceTree = "<group>"; };
 		0467B31A288DD42D002A2474 /* UserDefaultKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
 		0467B31B288DD42D002A2474 /* PropertyListValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyListValue.swift; sourceTree = "<group>"; };
-		046F911C288B6614008A619D /* RouterRocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterRocket.swift; sourceTree = "<group>"; };
+		046F911C288B6614008A619D /* RouterRocketProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterRocketProtocol.swift; sourceTree = "<group>"; };
 		048AD134285CA4FD00267AC1 /* RocketInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketInfoPresenter.swift; sourceTree = "<group>"; };
 		048D239A285B740100A0B4FA /* HorizontalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCell.swift; sourceTree = "<group>"; };
 		048D239E285B750700A0B4FA /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
@@ -230,7 +230,7 @@
 		046F911B288B65FE008A619D /* RouterModule */ = {
 			isa = PBXGroup;
 			children = (
-				046F911C288B6614008A619D /* RouterRocket.swift */,
+				046F911C288B6614008A619D /* RouterRocketProtocol.swift */,
 			);
 			path = RouterModule;
 			sourceTree = "<group>";
@@ -450,7 +450,7 @@
 				04396973288BEA340082EE31 /* URL+Extensions.swift in Sources */,
 				042DC2CB288B4003003C6F83 /* LaunchListView.swift in Sources */,
 				0439697A288C08CB0082EE31 /* SettingsPresenter.swift in Sources */,
-				046F911D288B6614008A619D /* RouterRocket.swift in Sources */,
+				046F911D288B6614008A619D /* RouterRocketProtocol.swift in Sources */,
 				04D4CC6A2890337B00D9FD75 /* RocketData.swift in Sources */,
 				04CCB6B5285A14A700543622 /* AppDelegate.swift in Sources */,
 				048D23A3285B75D500A0B4FA /* UIStackView+Constraints.swift in Sources */,

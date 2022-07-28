@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class LaunchListViewController: UIViewController {
     // MARK: - Properties
     
@@ -135,7 +136,7 @@ extension LaunchListViewController {
     }
     
     func stop(action: UIAlertAction) {
-        presenter?.tapBackBarButton(viewController: self)
+        presenter?.tapBackButton(viewController: self)
     }
 }
 

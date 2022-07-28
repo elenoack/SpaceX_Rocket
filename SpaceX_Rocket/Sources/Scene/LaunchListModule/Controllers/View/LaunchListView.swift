@@ -48,7 +48,7 @@ class LaunchListView: UIView {
         
     }
     
-    // MARK: - Initial
+    // MARK: - Initialization
     init() {
         super.init(frame: .zero)
         commonInit()

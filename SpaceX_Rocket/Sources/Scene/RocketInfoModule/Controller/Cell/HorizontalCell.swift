@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class HorizontalCell: UICollectionViewCell {
     // MARK: - Constants
     

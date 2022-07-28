@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class CustomTableViewCell: UITableViewCell {
     // MARK: - Properties
     

@@ -60,21 +60,24 @@ private extension NetworkService {
     func getData<T: Decodable>(url: String,
                                endpoint: String,
                                completion: @escaping (Result<T, NetworkError>) -> Void) {
-        guard let url = URL.url(with: url, endpoint: endpoint) else {
+        guard let url = URL.url(with: url, endpoint: endpoint)
+        else {
             completion(.failure(.badURL))
             return
         }
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let response = response as? HTTPURLResponse,
-                  (200...299).contains(response.statusCode) else {
+                  (200...299).contains(response.statusCode)
+            else {
                 completion(.failure(.serverError))
                 print(NetworkError.serverError.localizedDescription)
                 return
             }
             
             guard let data = data,
-                  let model = try? JSONDecoder().decode(T.self, from: data) else {
+                  let model = try? JSONDecoder().decode(T.self, from: data)
+            else {
                 completion(.failure(.badJSON))
                 return
             }

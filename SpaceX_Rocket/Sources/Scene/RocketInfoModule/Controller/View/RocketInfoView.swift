@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class RocketInfoView: UIView {
     // MARK: - Properties
     
@@ -109,7 +110,7 @@ class RocketInfoView: UIView {
         return view
     }()
     
-    // MARK: - Initial
+    // MARK: - Initialization
     
     init() {
         super.init(frame: .zero)

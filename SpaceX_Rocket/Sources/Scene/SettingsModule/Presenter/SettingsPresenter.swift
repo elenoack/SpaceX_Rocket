@@ -5,19 +5,27 @@
 //  Created by Elena Noack on 23.07.22.
 //
 
+
 import UIKit
+// MARK: - SettingsViewProtocol
 
 protocol SettingsViewProtocol: AnyObject {
     func download()
     func save()
 }
 
+// MARK: - SettingsPresenterProtocol
+
 protocol SettingsPresenterProtocol: AnyObject {
-    init(view: SettingsViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
+    init(view: SettingsViewProtocol,
+         networkService: NetworkServiceProtocol,
+         router: RouterProtocol)
     func tapBackButton(viewController: UIViewController)
     func downloadSettings()
     func saveSettings()
 }
+
+// MARK: - SettingsPresenter
 
 class SettingsPresenter: SettingsPresenterProtocol {
     
@@ -25,11 +33,17 @@ class SettingsPresenter: SettingsPresenterProtocol {
     let networkService: NetworkServiceProtocol?
     let router: RouterProtocol?
     
-    required init(view: SettingsViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
+    // MARK: - Initialization
+    
+    required init(view: SettingsViewProtocol,
+                  networkService: NetworkServiceProtocol,
+                  router: RouterProtocol) {
         self.view = view
         self.networkService = networkService
         self.router = router
     }
+    
+    // MARK: - Private
     
     func tapBackButton(viewController: UIViewController) {
         router?.backToRootVCModal(viewController: viewController)

@@ -20,7 +20,7 @@ class RocketInfoViewController: UIViewController, UICollectionViewDelegate {
     let defaults = UserDefaultsStorage()
     var serialNumber: Int 
   
-    // MARK: - Initial
+    // MARK: - Initialization
     
     init(serialNumber: Int) {
         self.serialNumber = serialNumber
@@ -195,9 +195,7 @@ extension RocketInfoViewController: UITableViewDataSource {
         configuration.textProperties.adjustsFontSizeToFitWidth = true
   
         if let rocket = self.presenter?.rockets?[serialNumber] {
-            
             switch indexPath.section {
-                
             case 0:
                 switch indexPath.row {
                 case 0:

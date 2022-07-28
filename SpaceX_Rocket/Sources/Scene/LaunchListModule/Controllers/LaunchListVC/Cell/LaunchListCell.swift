@@ -46,7 +46,8 @@ class LaunchListCell: UITableViewCell {
         return imageView
     }()
     
-    //MARK: - Initialize
+    //MARK: - Initialization
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1)

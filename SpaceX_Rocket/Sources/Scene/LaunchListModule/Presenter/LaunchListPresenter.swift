@@ -6,6 +6,7 @@
 //
 
 import UIKit
+// MARK: - LaunchViewProtocol
 
 protocol LaunchViewProtocol: AnyObject {
     func success()
@@ -13,14 +14,18 @@ protocol LaunchViewProtocol: AnyObject {
     func failure(error: NetworkError)
 }
 
+// MARK: - LaunchListPresenterProtocol
+
 protocol LaunchListPresenterProtocol: AnyObject {
     init(view: LaunchViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol, rocketId: String, rocketName: String)
-    func tapBackBarButton(viewController: UIViewController)
+    func tapBackButton(viewController: UIViewController)
     var launches: [LaunchData]? { get set }
     var rocketId: String { get }
     var rocketName: String { get }
     func fetchLaunchesData()
 }
+
+// MARK: - LaunchListPresenter
 
 class LaunchListPresenter: LaunchListPresenterProtocol {
     
@@ -31,6 +36,8 @@ class LaunchListPresenter: LaunchListPresenterProtocol {
     var rocketName: String
     var launches: [LaunchData]?
     
+    // MARK: - Initialization
+    
     required init(view: LaunchViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol, rocketId: String, rocketName: String) {
         self.view = view
         self.networkService = networkService
@@ -40,14 +47,18 @@ class LaunchListPresenter: LaunchListPresenterProtocol {
         fetchLaunchesData()
     }
     
-    func tapBackBarButton(viewController: UIViewController) {
+    // MARK: - Private
+    
+    func tapBackButton(viewController: UIViewController) {
         router?.backToRootVC(viewController: viewController)
     }
     
     func fetchLaunchesData() {
         networkService?.fetchLaunchesData { [weak self] result in
             DispatchQueue.main.async {
-                guard let self = self else { return }
+                guard let self = self
+                else {
+                    return }
                 switch result {
                 case let .success(LaunchData):
                     self.launches = LaunchData

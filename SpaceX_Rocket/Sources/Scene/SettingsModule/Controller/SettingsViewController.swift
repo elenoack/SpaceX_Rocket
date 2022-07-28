@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class SettingsViewController: UIViewController {
     // MARK: - Properties
     
@@ -19,6 +20,7 @@ class SettingsViewController: UIViewController {
     private let defaults = UserDefaultsStorage()
     
     //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
