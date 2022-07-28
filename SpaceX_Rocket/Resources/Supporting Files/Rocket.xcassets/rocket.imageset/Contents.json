@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "Снимок экрана 2022-07-28 в 18.42.06.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
+  }
+}

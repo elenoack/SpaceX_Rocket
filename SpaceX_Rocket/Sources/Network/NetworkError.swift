@@ -7,8 +7,8 @@
 
 import Foundation
 
+
 enum NetworkError: Error, LocalizedError {
-    
     case badURL
     case badJSON
     case serverError

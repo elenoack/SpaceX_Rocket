@@ -42,8 +42,7 @@ class PageViewController: UIPageViewController {
         
         for serialNumber in 0..<rockets {
             let viewController = assemblyBuilder.createRocketInfoModule(router: router, with: serialNumber)
-            let navigationController = UINavigationController(rootViewController:  viewController)
-            pages.append(navigationController)
+            pages.append(viewController)
      }
        
         pageControl.currentPageIndicatorTintColor = .white
@@ -59,10 +58,10 @@ class PageViewController: UIPageViewController {
     
     private func setupLayout() {
         view.addSubview(pageControl)
-//        pageControl.translatesAutoresizingMaskIntoConstraints = false
-//        pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-//        pageControl.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-//        pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        pageControl.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
 }
 

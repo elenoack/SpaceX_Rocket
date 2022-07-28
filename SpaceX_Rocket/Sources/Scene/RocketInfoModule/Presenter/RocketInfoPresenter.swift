@@ -78,10 +78,10 @@ class RocketInfoPresenter: RocketInfoPresenterProtocol {
                 case let .failure(error):
                     self.view?.failure(error: error)
                 }
-                return 
+                return
             }
         })
-        
+
     }
     
     func reload() {

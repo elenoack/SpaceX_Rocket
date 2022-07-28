@@ -36,7 +36,6 @@ class LaunchListViewController: UIViewController {
     private func setupavigationController() {
         navigationController?.isNavigationBarHidden = false
         title = presenter?.rocketName
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: #selector (back))
     }
 }
 
@@ -89,16 +88,6 @@ extension LaunchListViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - Actions
-
-extension LaunchListViewController {
-    
-    @objc
-    func back() {
-        presenter?.tapBackBarButton()
-    }
-}
-
 // MARK: - LaunchViewProtocol
 
 extension LaunchListViewController: LaunchViewProtocol {
@@ -141,8 +130,12 @@ extension LaunchListViewController {
     func showInfo() {
         launchListView?.blackView.isHidden = true
         guard let alert = launchListView?.alert else { return }
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: (stop)))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func stop(action: UIAlertAction) {
+        presenter?.tapBackBarButton(viewController: self)
     }
 }
 

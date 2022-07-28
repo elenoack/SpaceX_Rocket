@@ -15,7 +15,7 @@ protocol LaunchViewProtocol: AnyObject {
 
 protocol LaunchListPresenterProtocol: AnyObject {
     init(view: LaunchViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol, rocketId: String, rocketName: String)
-    func tapBackBarButton()
+    func tapBackBarButton(viewController: UIViewController)
     var launches: [LaunchData]? { get set }
     var rocketId: String { get }
     var rocketName: String { get }
@@ -40,8 +40,8 @@ class LaunchListPresenter: LaunchListPresenterProtocol {
         fetchLaunchesData()
     }
     
-    func tapBackBarButton() {
-        router?.backToRootVC()
+    func tapBackBarButton(viewController: UIViewController) {
+        router?.backToRootVC(viewController: viewController)
     }
     
     func fetchLaunchesData() {

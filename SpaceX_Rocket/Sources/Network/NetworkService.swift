@@ -7,15 +7,14 @@
 
 import UIKit
 
+
 struct Сonfiguration {
-    
     static let baseURL = "https://api.spacexdata.com/v4/"
     static let rocketsEndPoint = "rockets"
     static let launchesEndPoint = "launches"
 }
 
 protocol NetworkServiceProtocol {
-    
     func fetchRocketImage(with name: String, completion:  @escaping (Result<(UIImage?), NetworkError>) -> Void)
     func fetchRocketsData( completion: @escaping (Result<[RocketData], NetworkError>) -> Void)
     func fetchLaunchesData( completion: @escaping (Result<[LaunchData], NetworkError>) -> Void)
@@ -34,8 +33,9 @@ class NetworkService: NetworkServiceProtocol {
                 completion: completion)
     }
     
-    func fetchRocketImage(with name: String, completion:  @escaping (Result<(UIImage?), NetworkError>) -> Void) {
-        guard let url = URL(string: name) else {
+    func fetchRocketImage(with name: String, completion:  @escaping (Result<UIImage?, NetworkError>) -> Void) {
+        guard let url = URL(string: name)
+        else {
             completion(.failure(.badURL))
             return
         }

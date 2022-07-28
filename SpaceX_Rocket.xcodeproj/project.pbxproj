@@ -32,9 +32,9 @@
 		04C7C39A288EE2720057481F /* RocketInfoViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C7C399288EE2720057481F /* RocketInfoViewController+Extension.swift */; };
 		04CCB6B5285A14A700543622 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCB6B4285A14A700543622 /* AppDelegate.swift */; };
 		04CCB6B9285A14A700543622 /* RocketInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCB6B8285A14A700543622 /* RocketInfoViewController.swift */; };
-		04CCB6BE285A14AA00543622 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04CCB6BD285A14AA00543622 /* Assets.xcassets */; };
 		04D4CC6A2890337B00D9FD75 /* RocketData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4CC692890337B00D9FD75 /* RocketData.swift */; };
 		04D4CC6C2890337E00D9FD75 /* LaunchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4CC6B2890337E00D9FD75 /* LaunchData.swift */; };
+		04DBA5E32892E7D50041DC75 /* Rocket.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04DBA5E22892E7D50041DC75 /* Rocket.xcassets */; };
 		A555EFEB285A7C180066B789 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A555EFEA285A7C180066B789 /* SettingsViewController.swift */; };
 		A555EFEF285B28FA0066B789 /* LaunchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A555EFEE285B28FA0066B789 /* LaunchListViewController.swift */; };
 		A555EFF1285B29E00066B789 /* LaunchListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A555EFF0285B29E00066B789 /* LaunchListCell.swift */; };
@@ -67,10 +67,10 @@
 		04CCB6B1285A14A700543622 /* SpaceX_Rocket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceX_Rocket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CCB6B4285A14A700543622 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04CCB6B8285A14A700543622 /* RocketInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketInfoViewController.swift; sourceTree = "<group>"; };
-		04CCB6BD285A14AA00543622 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04CCB6C2285A14AA00543622 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04D4CC692890337B00D9FD75 /* RocketData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RocketData.swift; path = ../../../../../RocketData.swift; sourceTree = "<group>"; };
 		04D4CC6B2890337E00D9FD75 /* LaunchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaunchData.swift; path = ../../../../../LaunchData.swift; sourceTree = "<group>"; };
+		04DBA5E22892E7D50041DC75 /* Rocket.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Rocket.xcassets; sourceTree = "<group>"; };
 		A555EFEA285A7C180066B789 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A555EFEE285B28FA0066B789 /* LaunchListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchListViewController.swift; sourceTree = "<group>"; };
 		A555EFF0285B29E00066B789 /* LaunchListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchListCell.swift; sourceTree = "<group>"; };
@@ -325,7 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				04396969288BC2640082EE31 /* LaunchScreen.storyboard */,
-				04CCB6BD285A14AA00543622 /* Assets.xcassets */,
+				04DBA5E22892E7D50041DC75 /* Rocket.xcassets */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -434,7 +434,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04CCB6BE285A14AA00543622 /* Assets.xcassets in Resources */,
+				04DBA5E32892E7D50041DC75 /* Rocket.xcassets in Resources */,
 				0439696A288BC2640082EE31 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

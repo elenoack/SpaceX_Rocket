@@ -80,10 +80,16 @@ extension RocketInfoViewController: RocketViewProtocol {
     }
     
     func setupDisplay() {
-        self.rocketInfoView?.rocketName.text = self.presenter?.rockets?[self.serialNumber].rocketName
-        self.rocketInfoView?.imageView.image = self.presenter?.rocketsImage
+        DispatchQueue.main.async {
+            [self] in
+            rocketInfoView?.rocketName.text = presenter?.rockets?[serialNumber].rocketName
+            if serialNumber == 0 {
+                rocketInfoView?.imageView.image = UIImage(named: "rocket")
+            } else {
+                rocketInfoView?.imageView.image = self.presenter?.rocketsImage
+            }
+        }
     }
-    
     
     func failure(error: NetworkError) {
         self.showError(error)

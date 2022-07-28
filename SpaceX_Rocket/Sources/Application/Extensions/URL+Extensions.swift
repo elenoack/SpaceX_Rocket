@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 extension URL {
     
     static func url(with path: String,
@@ -15,5 +16,5 @@ extension URL {
               let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return nil }
         return urlComponents.url
     }
-    
+
 }
