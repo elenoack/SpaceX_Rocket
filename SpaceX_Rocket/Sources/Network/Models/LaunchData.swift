@@ -6,15 +6,16 @@
 //
 
 import Foundation
+// MARK: - LaunchData
 
 struct LaunchData: Decodable {
     let rocket: Rocket
     let name: String
-    let date_local: String
+    let dateLocal: String
     var success: Bool?
     
     var firstLaunchData: String {
-        reformat(inputDate: date_local )
+        reformat(inputDate: dateLocal )
     }
     
     private func reformat(inputDate: String) -> String {
@@ -24,7 +25,7 @@ struct LaunchData: Decodable {
         if let date = inputFormatter.date(from: inputDate) {
             let outputFormatter = DateFormatter()
             outputFormatter.locale = Locale(identifier: "ru_RU")
-            outputFormatter.setLocalizedDateFormatFromTemplate("MMM d, yyyy")
+            outputFormatter.dateStyle = .medium
             let outputDate = outputFormatter.string(from: date)
             return outputDate
         } else {
@@ -32,6 +33,11 @@ struct LaunchData: Decodable {
         }
     }
     
+    enum CodingKeys: String, CodingKey {
+        case rocket, name
+        case dateLocal = "date_local"
+        case success
+    }
 }
 
 enum Rocket: String, Codable {

@@ -6,16 +6,21 @@
 //
 
 import UIKit
+// MARK: - AssemblyBuilderProtocol
 
 protocol AssemblyBuilderProtocol {
     func createPageControlRocketModule(router: RouterModule) -> UIViewController
-    func createRocketInfoModule(router: RouterModule, with serialNumber: Int) -> UIViewController
-    func createLaunchListModule(router: RouterModule, rocketId: String, rocketName: String) -> UIViewController
+    func createRocketInfoModule(router: RouterModule,
+                                with serialNumber: Int) -> UIViewController
+    func createLaunchListModule(router: RouterModule,
+                                rocketId: String,
+                                rocketName: String) -> UIViewController
     func createSettingModule(router: RouterModule) -> UIViewController
 }
 
+// MARK: - AssemblyModuleBuilder
+
 class AssemblyModuleBuilder: AssemblyBuilderProtocol {
- 
     func createPageControlRocketModule(router: RouterModule) -> UIViewController {
         let networkService = NetworkService()
         let view = PageViewController(transitionStyle: .scroll,
@@ -38,11 +43,17 @@ class AssemblyModuleBuilder: AssemblyBuilderProtocol {
         return view
     }
 
-    func createLaunchListModule(router: RouterModule, rocketId: String, rocketName: String) -> UIViewController {
+    func createLaunchListModule(router: RouterModule,
+                                rocketId: String,
+                                rocketName: String) -> UIViewController {
         let networkService = NetworkService()
         let view = LaunchListViewController()
   
-        let presenter = LaunchListPresenter(view: view, networkService: networkService, router: router, rocketId: rocketId, rocketName: rocketName)
+        let presenter = LaunchListPresenter(view: view,
+                                            networkService: networkService,
+                                            router: router,
+                                            rocketId: rocketId,
+                                            rocketName: rocketName)
         view.presenter = presenter
         return view
     }

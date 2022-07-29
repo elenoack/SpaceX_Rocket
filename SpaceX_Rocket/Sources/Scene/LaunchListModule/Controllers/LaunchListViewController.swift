@@ -47,7 +47,7 @@ extension LaunchListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        Metric.sectionTableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -55,22 +55,22 @@ extension LaunchListViewController: UITableViewDataSource {
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
         
-            guard let rows = presenter?.launches else { return cell }
-            
-            let row = rows[indexPath.section]
-            
-            cell.dateLabel.text = row.firstLaunchData
-            cell.nameLabel.text = row.name
-            if row.success == true {
-                cell.launchImage.image = UIImage(named: "ok")
-            } else {
-                cell.launchImage.image = UIImage(named: "fail")
-            }
-        return cell
+        guard let rows = presenter?.launches else { return cell }
+        let sortRows = rows.sorted(by: { $0.dateLocal > $1.dateLocal })
+        let row = sortRows[indexPath.section]
+        
+        cell.dateLabel.text = row.firstLaunchData
+        cell.nameLabel.text = row.name
+        if row.success == true {
+            cell.launchImage.image = UIImage(named: Strings.imageName)
+        } else {
+            cell.launchImage.image = UIImage(named: Strings.imageNameFail)
         }
+        return cell
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        100
+        Metric.tableViewHeight
     }
 }
 
@@ -78,7 +78,7 @@ extension LaunchListViewController: UITableViewDataSource {
 
 extension LaunchListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        10
+        Metric.tableViewHeightHeader
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -117,8 +117,8 @@ extension LaunchListViewController {
     
     func showError(_ error: NetworkError) {
         launchListView?.blackView.isHidden = true
-        let alert = UIAlertController(title: "Что-то пошло не так...", message: error.localizedDescription, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: (restart))
+        let alert = UIAlertController(title: Strings.errorAlertTitle, message: error.localizedDescription, preferredStyle: .alert)
+        let action = UIAlertAction(title: Strings.alertActionTitle, style: .default, handler: (restart))
         alert.addAction(action)
         present(alert, animated: true)
     }
@@ -130,12 +130,30 @@ extension LaunchListViewController {
     func showInfo() {
         launchListView?.blackView.isHidden = true
         guard let alert = launchListView?.alert else { return }
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: (stop)))
+        alert.addAction(UIAlertAction(title: Strings.alertActionTitle, style: .default, handler: (stop)))
         self.present(alert, animated: true, completion: nil)
     }
     
     func stop(action: UIAlertAction) {
         presenter?.tapBackBarButton(viewController: self)
+    }
+}
+
+// MARK: - Constants
+
+extension LaunchListViewController {
+    
+    enum Metric {
+        static let sectionTableView: Int = 1
+        static let tableViewHeight: CGFloat = 100
+        static let tableViewHeightHeader: CGFloat = 10
+    }
+    
+    enum Strings {
+        static let imageName: String = "ok"
+        static let imageNameFail: String = "fail"
+        static let errorAlertTitle: String = "Что-то пошло не так..."
+        static let alertActionTitle: String = "OK"
     }
 }
 

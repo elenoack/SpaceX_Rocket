@@ -36,8 +36,8 @@ class PageViewController: UIPageViewController {
     }
     
     private func setupPageControl() {
-        
-        let router = RouterModule(navigationController: UINavigationController(), assemblyBuilder: assemblyBuilder)
+        let router = RouterModule(navigationController: UINavigationController(),
+                                  assemblyBuilder: assemblyBuilder)
         guard let rockets = presenter?.rockets?.count else { return }
         
         for serialNumber in 0..<rockets {
@@ -52,7 +52,6 @@ class PageViewController: UIPageViewController {
         pageControl.isUserInteractionEnabled = false
         pageControl.currentPage = initialPage
         pageControl.addTarget(self, action: #selector(tapped), for: .valueChanged)
-        
         setViewControllers([pages[initialPage]], direction: .forward, animated: true, completion: nil)
     }
     
@@ -61,7 +60,7 @@ class PageViewController: UIPageViewController {
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         pageControl.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        pageControl.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor).isActive = true
     }
 }
 
@@ -70,8 +69,9 @@ class PageViewController: UIPageViewController {
 extension PageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        
-        guard let currentIndex = pages.firstIndex(of: viewController) else { return nil }
+        guard let currentIndex = pages.firstIndex(of: viewController)
+        else {
+            return nil }
         
         if currentIndex == 0 {
             return pages.last
@@ -81,8 +81,9 @@ extension PageViewController: UIPageViewControllerDataSource {
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        
-        guard let currentIndex = pages.firstIndex(of: viewController) else { return nil }
+        guard let currentIndex = pages.firstIndex(of: viewController)
+        else {
+            return nil }
         
         if currentIndex < pages.count - 1 {
             return pages[currentIndex + 1]
@@ -97,8 +98,12 @@ extension PageViewController: UIPageViewControllerDataSource {
 extension PageViewController: UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        guard let viewControllers = pageViewController.viewControllers else { return }
-        guard let currentIndex = pages.firstIndex(of: viewControllers[0]) else { return }
+        guard let viewControllers = pageViewController.viewControllers
+        else {
+            return }
+        guard let currentIndex = pages.firstIndex(of: viewControllers[0])
+        else {
+            return }
         pageControl.currentPage = currentIndex
     }
 }
@@ -106,9 +111,7 @@ extension PageViewController: UIPageViewControllerDelegate {
 // MARK: - Actions
 
 extension PageViewController {
-    
     @objc func tapped(_ sender: UIPageControl) {
-        
         setViewControllers([pages[sender.currentPage]], direction: .forward, animated: true, completion: nil)
     }
 }
@@ -116,7 +119,6 @@ extension PageViewController {
 // MARK: - Actions
 
 extension PageViewController: PageViewProtocol {
-    
     func success(withNumber: Int) {
         setupPageControl()
     }

@@ -7,29 +7,32 @@
 
 import UIKit
 
+
 class LaunchListCell: UITableViewCell {
+    // MARK: - Properties
     
-    static let reuseId = "LaunchListCell"
+    static let reuseId = Strings.reuseId
     
     //MARK: - Views
+    
     private lazy var verticalStack: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 10
+        stackView.spacing = Metric.verticalStackSpacing
         return stackView
     }()
     
-     lazy var nameLabel: UILabel = {
+    lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-         label.numberOfLines = 2
+        label.numberOfLines = 2
         label.textColor = .white
         label.font = .systemFont(ofSize: 17, weight: .semibold)
         return label
     }()
     
-     lazy var dateLabel: UILabel = {
+    lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .lightGray
@@ -37,7 +40,7 @@ class LaunchListCell: UITableViewCell {
         return label
     }()
     
-     lazy var launchImage: UIImageView = {
+    lazy var launchImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -46,20 +49,25 @@ class LaunchListCell: UITableViewCell {
         return imageView
     }()
     
-    //MARK: - Initialize
+    // MARK: - Initialization
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1)
+        contentView.backgroundColor = UIColor(red: 33/255,
+                                              green: 33/255,
+                                              blue: 33/255,
+                                              alpha: 1)
         contentView.layer.cornerRadius = Metric.radius
         setupHierarchy()
         setupLayout()
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Strings.fatalError)
     }
     
     //MARK: - Settings
+    
     private func setupHierarchy() {
         contentView.addSubviewsForAutoLayout([
             launchImage,
@@ -76,8 +84,8 @@ class LaunchListCell: UITableViewCell {
         NSLayoutConstraint.activate([
             verticalStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Metric.leadingSpacing),
             verticalStack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            verticalStack.widthAnchor.constraint(equalToConstant: 200),
-
+            verticalStack.widthAnchor.constraint(equalToConstant: Metric.verticalStackWidth),
+            
             launchImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Metric.trailingSpacing),
             launchImage.widthAnchor.constraint(equalToConstant: Metric.imageWidth),
             launchImage.heightAnchor.constraint(equalToConstant: Metric.imageHeight),
@@ -86,7 +94,8 @@ class LaunchListCell: UITableViewCell {
     }
 }
 
-//MARK: - Metrics
+// MARK: - Constants
+
 extension LaunchListCell {
     
     enum Metric {
@@ -95,5 +104,12 @@ extension LaunchListCell {
         static let leadingSpacing: CGFloat = 50
         static let trailingSpacing: CGFloat = -50
         static let radius: CGFloat = 26
+        static let verticalStackWidth: CGFloat = 200
+        static let verticalStackSpacing: CGFloat = 10
+    }
+    
+    enum Strings {
+        static let reuseId: String = "LaunchListCell"
+        static let fatalError: String = "init(coder:) has not been implemented"
     }
 }

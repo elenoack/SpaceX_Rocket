@@ -68,8 +68,8 @@
 		04CCB6B4285A14A700543622 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04CCB6B8285A14A700543622 /* RocketInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketInfoViewController.swift; sourceTree = "<group>"; };
 		04CCB6C2285A14AA00543622 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		04D4CC692890337B00D9FD75 /* RocketData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RocketData.swift; path = ../../../../../RocketData.swift; sourceTree = "<group>"; };
-		04D4CC6B2890337E00D9FD75 /* LaunchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaunchData.swift; path = ../../../../../LaunchData.swift; sourceTree = "<group>"; };
+		04D4CC692890337B00D9FD75 /* RocketData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketData.swift; sourceTree = "<group>"; };
+		04D4CC6B2890337E00D9FD75 /* LaunchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchData.swift; sourceTree = "<group>"; };
 		04DBA5E22892E7D50041DC75 /* Rocket.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Rocket.xcassets; sourceTree = "<group>"; };
 		A555EFEA285A7C180066B789 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A555EFEE285B28FA0066B789 /* LaunchListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchListViewController.swift; sourceTree = "<group>"; };

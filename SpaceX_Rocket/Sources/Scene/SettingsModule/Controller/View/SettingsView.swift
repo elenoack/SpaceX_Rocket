@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class SettingsView: UIView {
   // MARK: - Properties
   
@@ -137,7 +138,8 @@ class SettingsView: UIView {
         return segmentedControl
     }()
 
-    // MARK: - Initial
+    // MARK: - Initialization
+    
     init() {
         super.init(frame: .zero)
         commonInit()
@@ -155,6 +157,7 @@ class SettingsView: UIView {
     }
     
     // MARK: - Settings
+    
     private func setupHierarchy() {
         addSubview(parrentStackView)
         
@@ -197,6 +200,7 @@ class SettingsView: UIView {
 }
 
 // MARK: - Constants
+
 extension SettingsView {
     
     enum Metric {
