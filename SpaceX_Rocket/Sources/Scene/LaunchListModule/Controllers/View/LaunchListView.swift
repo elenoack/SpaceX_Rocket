@@ -36,16 +36,15 @@ class LaunchListView: UIView {
     }()
     
     var alert: UIAlertController {
-        let alert = UIAlertController(title: "Информация отсутствует", message: "\n\n", preferredStyle: .alert)
-        let image = UIImageView(image: UIImage(named: "notInfo"))
+        let alert = UIAlertController(title: Strings.alertTitle, message: Strings.alertMessage, preferredStyle: .alert)
+        let image = UIImageView(image: UIImage(named: Strings.alertImageName))
         alert.view.addSubview(image)
         image.translatesAutoresizingMaskIntoConstraints = false
-        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .centerX, relatedBy: .equal, toItem: alert.view, attribute: .centerX, multiplier: 1, constant: 0))
-        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .centerY, relatedBy: .equal, toItem: alert.view, attribute: .centerY, multiplier: 1, constant: 0))
-        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 44.0))
-        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 44.0))
+        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .centerX, relatedBy: .equal, toItem: alert.view, attribute: .centerX, multiplier: Metric.one, constant: .zero))
+        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .centerY, relatedBy: .equal, toItem: alert.view, attribute: .centerY, multiplier: Metric.one, constant: .zero))
+        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: Metric.one, constant: Metric.alertSize))
+        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: Metric.one, constant: Metric.alertSize))
         return alert
-        
     }
     
     // MARK: - Initial
@@ -88,5 +87,21 @@ class LaunchListView: UIView {
             blackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             blackView.centerYAnchor.constraint(equalTo: centerYAnchor),
         ])
+    }
+}
+
+// MARK: - Constants
+
+extension LaunchListView {
+    
+    enum Metric {
+        static let alertSize: CGFloat = 44
+        static let one: CGFloat = 1
+    }
+    
+    enum Strings {
+        static let alertTitle: String = "Информация отсутствует"
+        static let alertMessage: String = "\n\n"
+        static let alertImageName: String = "notInfo"
     }
 }

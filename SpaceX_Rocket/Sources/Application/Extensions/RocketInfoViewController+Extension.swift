@@ -7,11 +7,12 @@
 
 import UIKit
 
-
 extension RocketInfoViewController {
+    // MARK: - Constants
     
     enum Metric {
         static let tableViewHeaderHeight: CGFloat = 50
+        static let tableViewHeight: CGFloat = 52
     }
     
     enum Strings {
@@ -35,6 +36,10 @@ extension RocketInfoViewController {
         static let seconds: String = "sec"
         static let firstStage: String = "Первая ступень"
         static let secondStage: String = "Вторая ступень"
+        static let errorAlertTitle: String = "Что-то пошло не так..."
+        static let alertActionTitle: String = "OK"
+        static let fatalError: String = "init(coder:) has not been implemented"
+        static let rocketImage: String = "rocket"
     }
 }
 

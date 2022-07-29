@@ -6,6 +6,7 @@
 //
 
 import Foundation
+// MARK: - RocketData
 
 struct RocketData: Decodable {
     
@@ -33,7 +34,7 @@ struct RocketData: Decodable {
         if let date = inputFormatter.date(from: inputDate) {
             let outputFormatter = DateFormatter()
             outputFormatter.locale = Locale(identifier: "ru_RU")
-            outputFormatter.setLocalizedDateFormatFromTemplate("MMMMddYYYY")
+            outputFormatter.dateStyle = .medium
             let outputDate = outputFormatter.string(from: date)
             return outputDate
         } else {

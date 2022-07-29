@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class SettingsViewController: UIViewController {
     // MARK: - Properties
     
@@ -19,6 +20,7 @@ class SettingsViewController: UIViewController {
     private let defaults = UserDefaultsStorage()
     
     //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -67,15 +69,6 @@ extension SettingsViewController {
     }
 }
 
-// MARK: - Constants
-
-extension SettingsViewController {
-    
-    enum Strings {
-        static let navigationButtonTitle: String = "Закрыть"
-    }
-}
-
 // MARK: - Private
 
 extension SettingsViewController: SettingsViewProtocol  {
@@ -92,6 +85,15 @@ extension SettingsViewController: SettingsViewProtocol  {
         defaults.unitsDiameter = settingsView?.diameterSegmentedControl.selectedSegmentIndex ?? 0
         defaults.unitsMass = settingsView?.massSegmentedControl.selectedSegmentIndex ?? 0
         defaults.unitsPayload = settingsView?.payloadSegmentedControl.selectedSegmentIndex ?? 0
+    }
+}
+
+// MARK: - Constants
+
+extension SettingsViewController {
+    
+    enum Strings {
+        static let navigationButtonTitle: String = "Закрыть"
     }
 }
 

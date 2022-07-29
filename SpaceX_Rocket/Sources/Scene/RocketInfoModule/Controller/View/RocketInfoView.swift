@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class RocketInfoView: UIView {
     // MARK: - Properties
     
@@ -87,7 +88,10 @@ class RocketInfoView: UIView {
     lazy var watchLaunchesButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(Strings.watchLaunchesButtonTitle, for: .normal)
-        button.backgroundColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1)
+        button.backgroundColor = UIColor(red: 33/255,
+                                         green: 33/255,
+                                         blue: 33/255,
+                                         alpha: 1)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.tintColor = .white
         button.layer.cornerRadius = Metric.watchLaunchesButtonHeight/3
@@ -109,7 +113,7 @@ class RocketInfoView: UIView {
         return view
     }()
     
-    // MARK: - Initial
+    // MARK: - Initialization
     
     init() {
         super.init(frame: .zero)

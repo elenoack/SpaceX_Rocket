@@ -7,10 +7,22 @@
 
 import UIKit
 
+
 class CustomTableViewCell: UITableViewCell {
+    // MARK: - Constants
+    
+    enum Metric {
+        static let labelIndent: CGFloat = 56
+    }
+    
+    enum Strings {
+        static let fatalError: String = "init(coder:) has not been implemented"
+        static let reuseID: String = "CustomTableViewCell"
+    }
+    
     // MARK: - Properties
     
-    static let reuseID = "CustomTableViewCell"
+    static let reuseID = Strings.reuseID
     
     lazy var quantityLabel: UILabel = {
         let label = UILabel()
@@ -31,12 +43,12 @@ class CustomTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             quantityLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            quantityLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -56),
+            quantityLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Metric.labelIndent),
         ])
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Strings.fatalError)
     }
     
     // MARK: - Сonfiguration

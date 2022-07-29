@@ -6,6 +6,7 @@
 //
 
 import UIKit
+// MARK: - LaunchViewProtocol
 
 protocol LaunchViewProtocol: AnyObject {
     func success()
@@ -13,8 +14,14 @@ protocol LaunchViewProtocol: AnyObject {
     func failure(error: NetworkError)
 }
 
+// MARK: - LaunchListPresenterProtocol
+
 protocol LaunchListPresenterProtocol: AnyObject {
-    init(view: LaunchViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol, rocketId: String, rocketName: String)
+    init(view: LaunchViewProtocol,
+         networkService: NetworkServiceProtocol,
+         router: RouterProtocol,
+         rocketId: String,
+         rocketName: String)
     func tapBackBarButton(viewController: UIViewController)
     var launches: [LaunchData]? { get set }
     var rocketId: String { get }
@@ -22,7 +29,10 @@ protocol LaunchListPresenterProtocol: AnyObject {
     func fetchLaunchesData()
 }
 
+// MARK: - LaunchListPresenter
+
 class LaunchListPresenter: LaunchListPresenterProtocol {
+    // MARK: - Properties
     
     let view: LaunchViewProtocol?
     let networkService: NetworkServiceProtocol?
@@ -31,7 +41,13 @@ class LaunchListPresenter: LaunchListPresenterProtocol {
     var rocketName: String
     var launches: [LaunchData]?
     
-    required init(view: LaunchViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol, rocketId: String, rocketName: String) {
+    // MARK: - Initialization
+    
+    required init(view: LaunchViewProtocol,
+                  networkService: NetworkServiceProtocol,
+                  router: RouterProtocol,
+                  rocketId: String,
+                  rocketName: String) {
         self.view = view
         self.networkService = networkService
         self.router = router
@@ -39,6 +55,8 @@ class LaunchListPresenter: LaunchListPresenterProtocol {
         self.rocketName = rocketName
         fetchLaunchesData()
     }
+    
+    // MARK: - Private
     
     func tapBackBarButton(viewController: UIViewController) {
         router?.backToRootVC(viewController: viewController)

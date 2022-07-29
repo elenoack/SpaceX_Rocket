@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+// MARK: - NetworkError
 
 enum NetworkError: Error, LocalizedError {
     case badURL

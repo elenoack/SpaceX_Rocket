@@ -15,13 +15,21 @@ class HorizontalCell: UICollectionViewCell {
         static let viewRadius: CGFloat = 28
     }
     
+    enum Strings {
+        static let fatalError: String = "init(coder:) has not been implemented"
+        static let reuseID: String = "HorizontalCell"
+    }
+    
     // MARK: - Properties
     
-    static let reuseID = "HorizontalCell"
+    static let reuseID = Strings.reuseID
     
     lazy var cellView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1)
+        view.backgroundColor = UIColor(red: 33/255,
+                                       green: 33/255,
+                                       blue: 33/255,
+                                       alpha: 1)
         view.layer.cornerRadius = Metric.viewRadius
         return view
     }()
@@ -50,7 +58,7 @@ class HorizontalCell: UICollectionViewCell {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Strings.fatalError)
     }
 }
 

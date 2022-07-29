@@ -28,7 +28,7 @@ class RocketInfoViewController: UIViewController, UICollectionViewDelegate {
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Strings.fatalError)
     }
     
     // MARK: - View Life Cycle
@@ -71,12 +71,7 @@ extension RocketInfoViewController {
 extension RocketInfoViewController: RocketViewProtocol {
     
     func success() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
             rocketInfoView?.tableView.reloadData()
-            rocketInfoView?.collectionView.reloadData()
-            rocketInfoView?.activityIndicatorView.stopAnimating()
-            rocketInfoView?.blurView.isHidden = true
-        }
     }
     
     func setupDisplay() {
@@ -84,10 +79,18 @@ extension RocketInfoViewController: RocketViewProtocol {
             [self] in
             rocketInfoView?.rocketName.text = presenter?.rockets?[serialNumber].rocketName
             if serialNumber == 0 {
-                rocketInfoView?.imageView.image = UIImage(named: "rocket")
+                rocketInfoView?.imageView.image = UIImage(named: Strings.rocketImage)
             } else {
                 rocketInfoView?.imageView.image = self.presenter?.rocketsImage
             }
+        }
+    }
+    
+    func successSave() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
+        rocketInfoView?.collectionView.reloadData()
+        rocketInfoView?.activityIndicatorView.stopAnimating()
+        rocketInfoView?.blurView.isHidden = true
         }
     }
     
@@ -279,14 +282,14 @@ extension RocketInfoViewController: UITableViewDataSource {
 extension RocketInfoViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 52
+        return Metric.tableViewHeight
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: Metric.tableViewHeaderHeight))
         
         let label = UILabel()
-        
+
         label.frame = CGRect.init(x: 19, y: 0, width: headerView.frame.width, height: headerView.frame.height)
         label.font = UIFont.boldSystemFont(ofSize: 20.0)
         label.textColor = .white
@@ -309,7 +312,6 @@ extension RocketInfoViewController: UITableViewDelegate {
 // MARK: - Actions
 
 extension RocketInfoViewController {
-    
     @objc
     func openLaunchVC()  {
         guard let rocketId = presenter?.rockets?[serialNumber].id else { return }
@@ -330,11 +332,10 @@ extension RocketInfoViewController {
 // MARK: - Private
 
 extension RocketInfoViewController {
-    
     func showError(_ error: NetworkError) {
         rocketInfoView?.blurView.isHidden = false
-        let alert = UIAlertController(title: "Что-то пошло не так...", message: error.localizedDescription, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: (restart))
+        let alert = UIAlertController(title: Strings.errorAlertTitle, message: error.localizedDescription, preferredStyle: .alert)
+        let action = UIAlertAction(title: Strings.alertActionTitle, style: .default, handler: (restart))
         alert.addAction(action)
         present(alert, animated: true)
     }
