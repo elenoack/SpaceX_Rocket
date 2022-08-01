@@ -12,6 +12,7 @@
 		042DC2C7288B34B3003C6F83 /* RocketInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042DC2C6288B34B3003C6F83 /* RocketInfoView.swift */; };
 		042DC2CB288B4003003C6F83 /* LaunchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042DC2CA288B4003003C6F83 /* LaunchListView.swift */; };
 		042DC2CE288B41D6003C6F83 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042DC2CD288B41D6003C6F83 /* SettingsView.swift */; };
+		042E22A32897F34500DA31B7 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E22A22897F34500DA31B7 /* UIViewController+Alert.swift */; };
 		0439696A288BC2640082EE31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04396969288BC2640082EE31 /* LaunchScreen.storyboard */; };
 		04396970288BE0310082EE31 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0439696E288BE0310082EE31 /* NetworkService.swift */; };
 		04396971288BE0310082EE31 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0439696F288BE0310082EE31 /* NetworkError.swift */; };
@@ -46,6 +47,7 @@
 		042DC2C6288B34B3003C6F83 /* RocketInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketInfoView.swift; sourceTree = "<group>"; };
 		042DC2CA288B4003003C6F83 /* LaunchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchListView.swift; sourceTree = "<group>"; };
 		042DC2CD288B41D6003C6F83 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		042E22A22897F34500DA31B7 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		04396969288BC2640082EE31 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0439696E288BE0310082EE31 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		0439696F288BE0310082EE31 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				048D239E285B750700A0B4FA /* UIView+Constraints.swift */,
 				048D23A2285B75D500A0B4FA /* UIStackView+Constraints.swift */,
 				04C7C399288EE2720057481F /* RocketInfoViewController+Extension.swift */,
+				042E22A22897F34500DA31B7 /* UIViewController+Alert.swift */,
 			);
 			name = Extensions;
 			path = Application/Extensions;
@@ -461,6 +464,7 @@
 				04396971288BE0310082EE31 /* NetworkError.swift in Sources */,
 				048D23A5285B82B600A0B4FA /* CustomCell.swift in Sources */,
 				A555EFEF285B28FA0066B789 /* LaunchListViewController.swift in Sources */,
+				042E22A32897F34500DA31B7 /* UIViewController+Alert.swift in Sources */,
 				048AD135285CA4FD00267AC1 /* RocketInfoPresenter.swift in Sources */,
 				04396977288C08140082EE31 /* LaunchListPresenter.swift in Sources */,
 				04D4CC6C2890337E00D9FD75 /* LaunchData.swift in Sources */,

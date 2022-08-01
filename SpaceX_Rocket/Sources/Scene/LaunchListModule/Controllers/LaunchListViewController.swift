@@ -117,10 +117,10 @@ extension LaunchListViewController {
     
     func showError(_ error: NetworkError) {
         launchListView?.blackView.isHidden = true
-        let alert = UIAlertController(title: Strings.errorAlertTitle, message: error.localizedDescription, preferredStyle: .alert)
         let action = UIAlertAction(title: Strings.alertActionTitle, style: .default, handler: (restart))
-        alert.addAction(action)
-        present(alert, animated: true)
+        showAlert(title: Strings.errorAlertTitle,
+                  message: error.localizedDescription,
+                  actions: [action])
     }
     
     func restart(action: UIAlertAction) {
@@ -129,9 +129,10 @@ extension LaunchListViewController {
     
     func showInfo() {
         launchListView?.blackView.isHidden = true
-        guard let alert = launchListView?.alert else { return }
-        alert.addAction(UIAlertAction(title: Strings.alertActionTitle, style: .default, handler: (stop)))
-        self.present(alert, animated: true, completion: nil)
+        let action = UIAlertAction(title: Strings.alertActionTitle, style: .default, handler: (stop))
+        showImageAlert(title: Strings.alertTitle,
+                       message: Strings.alertMessage,
+                       actions: [action])
     }
     
     func stop(action: UIAlertAction) {
@@ -154,6 +155,8 @@ extension LaunchListViewController {
         static let imageNameFail: String = "fail"
         static let errorAlertTitle: String = "Что-то пошло не так..."
         static let alertActionTitle: String = "OK"
+        static let alertTitle: String = "Информация отсутствует"
+        static let alertMessage: String = "\n\n"
     }
 }
 
