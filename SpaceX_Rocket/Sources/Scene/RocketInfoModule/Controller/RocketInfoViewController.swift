@@ -334,10 +334,10 @@ extension RocketInfoViewController {
 extension RocketInfoViewController {
     func showError(_ error: NetworkError) {
         rocketInfoView?.blurView.isHidden = false
-        let alert = UIAlertController(title: Strings.errorAlertTitle, message: error.localizedDescription, preferredStyle: .alert)
         let action = UIAlertAction(title: Strings.alertActionTitle, style: .default, handler: (restart))
-        alert.addAction(action)
-        present(alert, animated: true)
+        showAlert(title: Strings.errorAlertTitle,
+                  message: error.localizedDescription,
+                  actions: [action])
     }
     
     func restart(action: UIAlertAction) {
